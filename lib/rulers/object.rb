@@ -6,7 +6,7 @@ class Object
 
   sig { returns(T::Boolean) }
   def present?
-    !blank?
+    present?
   end
 
   sig { returns(T::Boolean) }

@@ -20,20 +20,19 @@ module Rulers
 
     sig { params(env: Rulers::Env).returns([Rulers::StatusCode, Rulers::Headers, Rulers::Response]) }
     def call(env)
-      if env['PATH_INFO'] == '/favicon.ico'
-        return [404, {'content-type' => 'text/html'}, []]
-      end
+      return [404, { "content-type" => "text/html" }, []] if env["PATH_INFO"] == "/favicon.ico"
 
       begin
         klass, action = get_controller_and_action(env)
-      rescue NameError => e
-        return [404, {'content-type' => 'text/html'}, ["There is no controller named \"#{klass.to_s.capitalize}Controller\""]]
+      rescue NameError
+        return [404, { "content-type" => "text/html" },
+                ["There is no controller named \"#{klass.to_s.capitalize}Controller\""]]
       end
       controller = T.unsafe(klass).new(env)
 
       response = controller.send(action)
 
-      [200, {'content-type' => 'text/html'}, [response]]
+      [200, { "content-type" => "text/html" }, [response]]
     end
   end
 
@@ -44,7 +43,6 @@ module Rulers
     def initialize(env)
       @env = env
     end
-
 
     sig { returns(Env) }
     attr_reader :env

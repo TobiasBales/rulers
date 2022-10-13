@@ -6,7 +6,6 @@ require_relative "test_helper"
 class TestApp < Rulers::Application
 end
 
-
 class RulersAppTest < Minitest::Test
   include Rack::Test::Methods
 

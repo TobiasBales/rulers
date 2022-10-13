@@ -1,6 +1,6 @@
 # typed: strict
 # frozen_string_literal: true
-#
+
 class Array
   extend T::Sig
 
