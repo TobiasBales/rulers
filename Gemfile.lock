@@ -103,7 +103,7 @@ PLATFORMS
 
 DEPENDENCIES
   minitest (~> 5.0)
-  rack-test
+  rack-test (~> 2.0)
   rake (~> 13.0)
   rubocop (~> 1.21)
   rubocop-minitest
