@@ -1,10 +1,17 @@
+# typed: strict
+# frozen_string_literal: true
+
 module Rulers
   class Application
-    def get_controller_and_action(env)
-      _, controller, action, after = env["PATH_INFO"].split('/', 4)
-      controller = "#{controller.capitalize}Controller"
+    extend T::Sig
 
-      [Object.const_get(controller), action]
+    sig { params(env: Rulers::Env).returns([Class, String])}
+    def get_controller_and_action(env)
+      path = T.cast(env["PATH_INFO"], String)
+
+      _, controller, action, after = path.split('/', 4)
+
+      [Object.const_get("#{controller&.capitalize}Controller"), T.must(action)]
     end
   end
 end
