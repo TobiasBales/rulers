@@ -1,8 +1,9 @@
 # Rulers
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rulers`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby on rulers, like ruby on rails, but smaller.
 
-TODO: Delete this and the text above, and describe your gem
+
+This is the code for the [rebuilding rails book](https://www.rebuilding-rails.com)
 
 ## Installation
 
@@ -26,7 +27,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rulers. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rulers/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/TobiasBales/rulers. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/TobiasBales/rulers/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -34,4 +35,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Rulers project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rulers/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Rulers project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/TobiasBales/rulers/blob/main/CODE_OF_CONDUCT.md).
