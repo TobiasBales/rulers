@@ -6,6 +6,7 @@ require "rulers/version"
 require "rulers/array"
 require "rulers/object"
 require "rulers/string"
+require "rulers/auto_loading"
 require "rulers/routing"
 
 module Rulers
