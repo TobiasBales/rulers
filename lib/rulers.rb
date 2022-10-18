@@ -5,6 +5,7 @@ require "sorbet-runtime"
 require "rulers/version"
 require "rulers/array"
 require "rulers/object"
+require "rulers/string"
 require "rulers/routing"
 
 module Rulers
