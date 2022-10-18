@@ -4,10 +4,17 @@
 class Object
   extend T::Sig
 
-  sig { params(const: Symbol).returns(Class) }
+  sig { params(const: Symbol).returns(T.nilable(Class)) }
   def self.const_missing(const)
-    require const.to_s.to_underscore
+    return nil if @calling_const_missing
 
-    Object.const_get(const)
+    @calling_const_missing = T.let(true, T.nilable(T::Boolean))
+
+    require const.to_s.to_underscore
+    klass = Object.const_get(const)
+
+    @calling_const_missing = false
+
+    klass
   end
 end
