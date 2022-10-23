@@ -15,6 +15,20 @@ module Rulers
     sig { returns(Env) }
     attr_reader :env
 
+    sig { params(view_name: Symbol, locals: T::Hash[Symbol, T.untyped]).returns(String) }
+    def render(view_name, locals={})
+      filename = File.join("app", "views", controller_name, "#{view_name}.html.erb")
+      template = File.read(filename)
+      eruby = Erubis::Eruby.new(template)
+
+      eruby.result(locals.merge(env: env))
+    end
+
+    sig { returns(String) }
+    def controller_name
+      klass = self.class.to_s.gsub(/Controller$/, "").to_underscore
+    end
+
     sig { returns(T::Boolean) }
     def get?
       env["REQUEST_METHOD"] == "GET"
