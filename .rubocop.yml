@@ -20,6 +20,9 @@ AllCops:
 Minitest/AssertPredicate:
   Enabled: false
 
+Rails/RefuteMethods:
+  Enabled: false
+
 Style/AccessorGrouping:
   EnforcedStyle: separated
 Style/Documentation:
