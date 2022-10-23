@@ -1,6 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
+require "set"
+
 class Object
   extend T::Sig
 
