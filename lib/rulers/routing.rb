@@ -5,7 +5,7 @@ module Rulers
   class Application
     extend T::Sig
 
-    sig { params(env: Rulers::Env).returns([Class, String]) }
+    sig { params(env: Rulers::Env).returns([T.nilable(Class), String]) }
     def get_controller_and_action(env)
       path = T.cast(env["PATH_INFO"], String)
 

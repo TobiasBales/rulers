@@ -24,12 +24,13 @@ module Rulers
     def call(env)
       return [404, { "content-type" => "text/html" }, []] if env["PATH_INFO"] == "/favicon.ico"
 
-      begin
-        klass, action = get_controller_and_action(env)
-      rescue NameError
+      klass, action = get_controller_and_action(env)
+
+      if klass.nil?
         return [404, { "content-type" => "text/html" },
                 ["There is no controller named \"#{klass.to_s.capitalize}Controller\""]]
       end
+
       controller = T.unsafe(klass).new(env)
 
       response = controller.send(action)
