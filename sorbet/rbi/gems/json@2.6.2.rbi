@@ -1540,24 +1540,9 @@ module Kernel
   def jj(*objs); end
 end
 
-class Range
-  include ::Enumerable
-end
-
 class Set
   include ::Enumerable
 end
 
 # source://set/1.0.2/set.rb#815
 Set::InspectKey = T.let(T.unsafe(nil), Symbol)
-
-class Struct
-  include ::Enumerable
-end
-
-Struct::Group = Etc::Group
-Struct::Passwd = Etc::Passwd
-
-class Symbol
-  include ::Comparable
-end

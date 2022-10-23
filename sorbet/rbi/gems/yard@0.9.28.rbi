@@ -84,10 +84,6 @@ File::RELATIVE_PARENTDIR = T.let(T.unsafe(nil), String)
 # source://yard//lib/yard/core_ext/file.rb#6
 File::RELATIVE_SAMEDIR = T.let(T.unsafe(nil), String)
 
-class File::Stat
-  include ::Comparable
-end
-
 # :stopdoc:
 #
 # source://yard//lib/yard/rubygems/backports/gem.rb#2
@@ -106,68 +102,16 @@ end
 # source://yard//lib/yard/rubygems/backports/source_index.rb#363
 Gem::Cache = Gem::SourceIndex
 
-class Gem::ConfigFile
-  include ::Gem::Text
-  include ::Gem::DefaultUserInteraction
-  include ::Gem::UserInteraction
-end
-
-Gem::ConfigFile::DEFAULT_IPV4_FALLBACK_ENABLED = T.let(T.unsafe(nil), FalseClass)
 Gem::ConfigMap = T.let(T.unsafe(nil), Hash)
 
 module Gem::DefaultUserInteraction
   include ::Gem::Text
 end
 
-class Gem::DependencyList
-  include ::Enumerable
-  include ::Gem::TSort
-end
-
-class Gem::Installer
-  include ::Gem::Text
-  include ::Gem::DefaultUserInteraction
-  include ::Gem::UserInteraction
-  include ::Gem::InstallerUninstallerUtils
-  extend ::Gem::Deprecate
-end
-
-Gem::Installer::ExtensionBuildError = Gem::Ext::BuildError
-
-class Gem::Installer::FakePackage
-  def initialize(spec); end
-
-  def copy_to(path); end
-  def data_mode; end
-  def data_mode=(_arg0); end
-  def dir_mode; end
-  def dir_mode=(_arg0); end
-  def extract_files(destination_dir, pattern = T.unsafe(nil)); end
-  def prog_mode; end
-  def prog_mode=(_arg0); end
-  def spec; end
-  def spec=(_arg0); end
-end
-
-module Gem::InstallerUninstallerUtils
-  def regenerate_plugins_for(spec, plugins_dir); end
-  def remove_plugins_for(spec, plugins_dir); end
-end
-
 Gem::KERNEL_WARN_IGNORES_INTERNAL_ENTRIES = T.let(T.unsafe(nil), TrueClass)
-
-class Gem::Licenses
-  extend ::Gem::Text
-end
-
-Gem::Licenses::LICENSE_REF = T.let(T.unsafe(nil), String)
 
 class Gem::List
   include ::Enumerable
-end
-
-class Gem::NameTuple
-  include ::Comparable
 end
 
 Gem::RbConfigPriorities = T.let(T.unsafe(nil), Array)
@@ -390,34 +334,6 @@ class Gem::SourceIndex
   end
 end
 
-class Gem::SourceList
-  include ::Enumerable
-end
-
-class Gem::SpecFetcher
-  include ::Gem::Text
-  include ::Gem::DefaultUserInteraction
-  include ::Gem::UserInteraction
-
-  def initialize(sources = T.unsafe(nil)); end
-
-  def available_specs(type); end
-  def detect(type = T.unsafe(nil)); end
-  def latest_specs; end
-  def prerelease_specs; end
-  def search_for_dependency(dependency, matching_platform = T.unsafe(nil)); end
-  def sources; end
-  def spec_for_dependency(dependency, matching_platform = T.unsafe(nil)); end
-  def specs; end
-  def suggest_gems_from_name(gem_name, type = T.unsafe(nil), num_results = T.unsafe(nil)); end
-  def tuples_for(source, type, gracefully_ignore = T.unsafe(nil)); end
-
-  class << self
-    def fetcher; end
-    def fetcher=(fetcher); end
-  end
-end
-
 class Gem::Specification < ::Gem::BasicSpecification
   include ::Gem::Specification::YamlBackfiller
   include ::Bundler::MatchMetadata
@@ -606,6 +522,7 @@ end
 
 Gem::Version::Requirement = Gem::Requirement
 
+# source://yard//lib/yard/parser/ruby/legacy/irb/slex.rb#17
 class IRB::SLex
   # @return [SLex] a new instance of SLex
   #
@@ -656,6 +573,8 @@ IRB::SLex::D_WARN = T.let(T.unsafe(nil), IRB::Notifier::LeveledNotifier)
 #   class Node -
 #
 # ----------------------------------------------------------------------
+#
+# source://yard//lib/yard/parser/ruby/legacy/irb/slex.rb#86
 class IRB::SLex::Node
   # if postproc is nil, this node is an abstract node.
   # if postproc is non-nil, this node is a real node.
@@ -784,6 +703,15 @@ class Module
   def class_name; end
 end
 
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#13
+Module::DELEGATION_RESERVED_KEYWORDS = T.let(T.unsafe(nil), Array)
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#14
+Module::DELEGATION_RESERVED_METHOD_NAMES = T.let(T.unsafe(nil), Set)
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#10
+Module::RUBY_RESERVED_KEYWORDS = T.let(T.unsafe(nil), Array)
+
 # Keep track of Ruby version for compatibility code
 #
 # @deprecated Use {YARD.ruby18?} or {YARD.ruby19?} instead.
@@ -794,1782 +722,10 @@ RUBY18 = T.let(T.unsafe(nil), FalseClass)
 # source://yard//lib/yard.rb#62
 RUBY19 = T.let(T.unsafe(nil), TrueClass)
 
-module Rack
-  class << self
-    # source://rack/3.0.0/lib/rack/version.rb#31
-    def release; end
-
-    # source://rack/3.0.0/lib/rack/version.rb#23
-    def version; end
-  end
-end
-
-module Rack::Auth; end
-
-class Rack::Auth::AbstractHandler
-  # source://rack/3.0.0/lib/rack/auth/abstract/handler.rb#15
-  def initialize(app, realm = T.unsafe(nil), &authenticator); end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/handler.rb#13
-  def realm; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/handler.rb#13
-  def realm=(_arg0); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/handler.rb#31
-  def bad_request; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/handler.rb#22
-  def unauthorized(www_authenticate = T.unsafe(nil)); end
-end
-
-class Rack::Auth::AbstractRequest
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#9
-  def initialize(env); end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#33
-  def params; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#25
-  def parts; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#17
-  def provided?; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#13
-  def request; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#29
-  def scheme; end
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#21
-  def valid?; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/auth/abstract/request.rb#42
-  def authorization_key; end
-end
-
-# source://rack/3.0.0/lib/rack/auth/abstract/request.rb#40
-Rack::Auth::AbstractRequest::AUTHORIZATION_KEYS = T.let(T.unsafe(nil), Array)
-
-class Rack::Auth::Basic < ::Rack::Auth::AbstractHandler
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#18
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#37
-  def challenge; end
-
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#41
-  def valid?(auth); end
-end
-
-class Rack::Auth::Basic::Request < ::Rack::Auth::AbstractRequest
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#46
-  def basic?; end
-
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#50
-  def credentials; end
-
-  # source://rack/3.0.0/lib/rack/auth/basic.rb#54
-  def username; end
-end
-
-module Rack::Auth::Digest; end
-
-class Rack::Auth::Digest::MD5 < ::Rack::Auth::AbstractHandler
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#150
-  def initialize(app, realm = T.unsafe(nil), opaque = T.unsafe(nil), &authenticator); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#163
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#146
-  def opaque; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#146
-  def opaque=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#148
-  def passwords_hashed=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#159
-  def passwords_hashed?; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#238
-  def A1(auth, password); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#242
-  def A2(auth); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#228
-  def H(data); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#234
-  def KD(secret, data); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#203
-  def challenge(hash = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#246
-  def digest(auth, password); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#228
-  def md5(data); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#192
-  def params(hash = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#207
-  def valid?(auth); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#223
-  def valid_digest?(auth); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#219
-  def valid_nonce?(auth); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#215
-  def valid_opaque?(auth); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#211
-  def valid_qop?(auth); end
-end
-
-# source://rack/3.0.0/lib/rack/auth/digest.rb#190
-Rack::Auth::Digest::MD5::QOP = T.let(T.unsafe(nil), String)
-
-class Rack::Auth::Digest::Nonce
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#31
-  def initialize(timestamp = T.unsafe(nil), given_digest = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#39
-  def digest; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#51
-  def fresh?; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#47
-  def stale?; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#35
-  def to_s; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#43
-  def valid?; end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#27
-    def parse(string); end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#24
-    def private_key; end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#24
-    def private_key=(_arg0); end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#24
-    def time_limit; end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#24
-    def time_limit=(_arg0); end
-  end
-end
-
-class Rack::Auth::Digest::Params < ::Hash
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#76
-  def initialize; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#82
-  def [](k); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#86
-  def []=(k, v); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#98
-  def quote(str); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#92
-  def to_s; end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#66
-    def dequote(str); end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#59
-    def parse(str); end
-
-    # source://rack/3.0.0/lib/rack/auth/digest.rb#72
-    def split_header_value(str); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/auth/digest.rb#90
-Rack::Auth::Digest::Params::UNQUOTED = T.let(T.unsafe(nil), Array)
-
-class Rack::Auth::Digest::Request < ::Rack::Auth::AbstractRequest
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#113
-  def correct_uri?; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#109
-  def digest?; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#105
-  def method; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#129
-  def method_missing(sym, *args); end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#117
-  def nonce; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#121
-  def params; end
-
-  # source://rack/3.0.0/lib/rack/auth/digest.rb#125
-  def respond_to?(sym, *_arg1); end
-end
-
-class Rack::BodyProxy
-  # source://rack/3.0.0/lib/rack/body_proxy.rb#10
-  def initialize(body, &block); end
-
-  # source://rack/3.0.0/lib/rack/body_proxy.rb#23
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/body_proxy.rb#35
-  def closed?; end
-
-  # source://rack/3.0.0/lib/rack/body_proxy.rb#40
-  def method_missing(method_name, *args, **_arg2, &block); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/body_proxy.rb#17
-  def respond_to_missing?(method_name, include_all = T.unsafe(nil)); end
-end
-
-class Rack::Builder
-  # source://rack/3.0.0/lib/rack/builder.rb#114
-  def initialize(default_app = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#261
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#244
-  def freeze_app; end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#237
-  def map(path, &block); end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#192
-  def run(app = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#249
-  def to_app; end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#149
-  def use(middleware, *args, **_arg2, &block); end
-
-  # source://rack/3.0.0/lib/rack/builder.rb#208
-  def warmup(prc = T.unsafe(nil), &block); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/builder.rb#269
-  def generate_map(default_app, mapping); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/builder.rb#126
-    def app(default_app = T.unsafe(nil), &block); end
-
-    # source://rack/3.0.0/lib/rack/builder.rb#87
-    def load_file(path); end
-
-    # source://rack/3.0.0/lib/rack/builder.rb#102
-    def new_from_string(builder_script, file = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/builder.rb#65
-    def parse_file(path); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/builder.rb#39
-Rack::Builder::UTF_8_BOM = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#19
-Rack::CACHE_CONTROL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#20
-Rack::CONTENT_LENGTH = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#21
-Rack::CONTENT_TYPE = T.let(T.unsafe(nil), String)
-
-class Rack::Cascade
-  # source://rack/3.0.0/lib/rack/cascade.rb#24
-  def initialize(apps, cascade_for = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/cascade.rb#59
-  def <<(app); end
-
-  # source://rack/3.0.0/lib/rack/cascade.rb#59
-  def add(app); end
-
-  # source://rack/3.0.0/lib/rack/cascade.rb#16
-  def apps; end
-
-  # source://rack/3.0.0/lib/rack/cascade.rb#35
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/cascade.rb#64
-  def include?(app); end
-end
-
-# source://rack/3.0.0/lib/rack/cascade.rb#13
-Rack::Cascade::NotFound = T.let(T.unsafe(nil), Array)
-
-class Rack::Chunked
-  include ::Rack::Utils
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#82
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#101
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#87
-  def chunkable_version?(ver); end
-end
-
-class Rack::Chunked::Body
-  # source://rack/3.0.0/lib/rack/chunked.rb#34
-  def initialize(body); end
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#54
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#40
-  def each(&block); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#61
-  def yield_trailers; end
-end
-
-# source://rack/3.0.0/lib/rack/chunked.rb#31
-Rack::Chunked::Body::TAIL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/chunked.rb#30
-Rack::Chunked::Body::TERM = T.let(T.unsafe(nil), String)
-
-class Rack::Chunked::TrailerBody < ::Rack::Chunked::Body
-  private
-
-  # source://rack/3.0.0/lib/rack/chunked.rb#75
-  def yield_trailers; end
-end
-
-class Rack::CommonLogger
-  # source://rack/3.0.0/lib/rack/common_logger.rb#29
-  def initialize(app, logger = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/common_logger.rb#41
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/common_logger.rb#83
-  def extract_content_length(headers); end
-
-  # source://rack/3.0.0/lib/rack/common_logger.rb#52
-  def log(env, status, response_headers, began_at); end
-end
-
-# source://rack/3.0.0/lib/rack/common_logger.rb#23
-Rack::CommonLogger::FORMAT = T.let(T.unsafe(nil), String)
-
-class Rack::ConditionalGet
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#22
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#28
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#62
-  def etag_matches?(none_match, headers); end
-
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#51
-  def fresh?(env, headers); end
-
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#68
-  def modified_since?(modified_since, headers); end
-
-  # source://rack/3.0.0/lib/rack/conditional_get.rb#75
-  def to_rfc2822(since); end
-end
-
-class Rack::Config
-  # source://rack/3.0.0/lib/rack/config.rb#12
-  def initialize(app, &block); end
-
-  # source://rack/3.0.0/lib/rack/config.rb#17
-  def call(env); end
-end
-
-class Rack::ContentLength
-  include ::Rack::Utils
-
-  # source://rack/3.0.0/lib/rack/content_length.rb#15
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/content_length.rb#19
-  def call(env); end
-end
-
-class Rack::ContentType
-  include ::Rack::Utils
-
-  # source://rack/3.0.0/lib/rack/content_type.rb#18
-  def initialize(app, content_type = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/content_type.rb#23
-  def call(env); end
-end
-
-# source://rack/3.0.0/lib/rack/constants.rb#32
-Rack::DELETE = T.let(T.unsafe(nil), String)
-
-class Rack::Deflater
-  # source://rack/3.0.0/lib/rack/deflater.rb#39
-  def initialize(app, options = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/deflater.rb#46
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/deflater.rb#136
-  def should_deflate?(env, status, headers, body); end
-end
-
-class Rack::Deflater::GzipStream
-  # source://rack/3.0.0/lib/rack/deflater.rb#92
-  def initialize(body, mtime, sync); end
-
-  # source://rack/3.0.0/lib/rack/deflater.rb#128
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/deflater.rb#99
-  def each(&block); end
-
-  # source://rack/3.0.0/lib/rack/deflater.rb#123
-  def write(data); end
-end
-
-# source://rack/3.0.0/lib/rack/deflater.rb#85
-Rack::Deflater::GzipStream::BUFFER_LENGTH = T.let(T.unsafe(nil), Integer)
-
-class Rack::Directory
-  # source://rack/3.0.0/lib/rack/directory.rb#83
-  def initialize(root, app = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#89
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#109
-  def check_bad_request(path_info); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#119
-  def check_forbidden(path_info); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#181
-  def entity_not_found(path_info); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#197
-  def filesize_format(int); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#96
-  def get(env); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#130
-  def list_directory(path_info, path, script_name); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#171
-  def list_path(env, path, path_info, script_name); end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#80
-  def root; end
-
-  # source://rack/3.0.0/lib/rack/directory.rb#163
-  def stat(path); end
-end
-
-# source://rack/3.0.0/lib/rack/directory.rb#20
-Rack::Directory::DIR_FILE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/directory.rb#43
-Rack::Directory::DIR_PAGE_FOOTER = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/directory.rb#21
-Rack::Directory::DIR_PAGE_HEADER = T.let(T.unsafe(nil), String)
-
-class Rack::Directory::DirectoryBody < ::Struct
-  # source://rack/3.0.0/lib/rack/directory.rb#53
-  def each; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/directory.rb#73
-  def DIR_FILE_escape(htmls); end
-end
-
-# source://rack/3.0.0/lib/rack/directory.rb#189
-Rack::Directory::FILESIZE_FORMAT = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/constants.rb#22
-Rack::ETAG = T.let(T.unsafe(nil), String)
-
-class Rack::ETag
-  # source://rack/3.0.0/lib/rack/etag.rb#22
-  def initialize(app, no_cache_control = T.unsafe(nil), cache_control = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/etag.rb#28
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/etag.rb#58
-  def digest_body(body); end
-
-  # source://rack/3.0.0/lib/rack/etag.rb#50
-  def etag_status?(status); end
-
-  # source://rack/3.0.0/lib/rack/etag.rb#54
-  def skip_caching?(headers); end
-end
-
-# source://rack/3.0.0/lib/rack/etag.rb#20
-Rack::ETag::DEFAULT_CACHE_CONTROL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/etag.rb#19
-Rack::ETag::ETAG_STRING = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#23
-Rack::EXPIRES = T.let(T.unsafe(nil), String)
-
-class Rack::Events
-  # source://rack/3.0.0/lib/rack/events.rb#106
-  def initialize(app, handlers); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#111
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/events.rb#149
-  def make_request(env); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#153
-  def make_response(status, headers, body); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#137
-  def on_commit(request, response); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#133
-  def on_error(request, response, e); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#145
-  def on_finish(request, response); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#141
-  def on_start(request, response); end
-end
-
-module Rack::Events::Abstract
-  # source://rack/3.0.0/lib/rack/events.rb#66
-  def on_commit(req, res); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#75
-  def on_error(req, res, e); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#72
-  def on_finish(req, res); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#69
-  def on_send(req, res); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#63
-  def on_start(req, res); end
-end
-
-class Rack::Events::BufferedResponse < ::Rack::Response::Raw
-  # source://rack/3.0.0/lib/rack/events.rb#98
-  def initialize(status, headers, body); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#96
-  def body; end
-
-  # source://rack/3.0.0/lib/rack/events.rb#103
-  def to_a; end
-end
-
-class Rack::Events::EventedBodyProxy < ::Rack::BodyProxy
-  # source://rack/3.0.0/lib/rack/events.rb#82
-  def initialize(body, request, response, handlers, &block); end
-
-  # source://rack/3.0.0/lib/rack/events.rb#89
-  def each; end
-
-  # source://rack/3.0.0/lib/rack/events.rb#80
-  def request; end
-
-  # source://rack/3.0.0/lib/rack/events.rb#80
-  def response; end
-end
-
-# source://rack/3.0.0/lib/rack/file.rb#8
-Rack::File = Rack::Files
-
-class Rack::Files
-  # source://rack/3.0.0/lib/rack/files.rb#27
-  def initialize(root, headers = T.unsafe(nil), default_mime = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#34
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#39
-  def get(env); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#25
-  def root; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#68
-  def serving(request, path); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/files.rb#190
-  def fail(status, body, headers = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#209
-  def filesize(path); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#205
-  def mime_type(path, default_mime); end
-end
-
-# source://rack/3.0.0/lib/rack/files.rb#21
-Rack::Files::ALLOWED_VERBS = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/files.rb#22
-Rack::Files::ALLOW_HEADER = T.let(T.unsafe(nil), String)
-
-class Rack::Files::BaseIterator
-  # source://rack/3.0.0/lib/rack/files.rb#124
-  def initialize(path, ranges, options); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#144
-  def bytesize; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#153
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#130
-  def each; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#122
-  def options; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#122
-  def path; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#122
-  def ranges; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/files.rb#171
-  def each_range_part(file, range); end
-
-  # source://rack/3.0.0/lib/rack/files.rb#157
-  def multipart?; end
-
-  # source://rack/3.0.0/lib/rack/files.rb#161
-  def multipart_heading(range); end
-end
-
-class Rack::Files::Iterator < ::Rack::Files::BaseIterator
-  # source://rack/3.0.0/lib/rack/files.rb#122
-  def to_path; end
-end
-
-# source://rack/3.0.0/lib/rack/files.rb#23
-Rack::Files::MULTIPART_BOUNDARY = T.let(T.unsafe(nil), String)
-
-class Rack::ForwardRequest < ::Exception
-  # source://rack/3.0.0/lib/rack/recursive.rb#17
-  def initialize(url, env = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/recursive.rb#15
-  def env; end
-
-  # source://rack/3.0.0/lib/rack/recursive.rb#15
-  def url; end
-end
-
-# source://rack/3.0.0/lib/rack/constants.rb#28
-Rack::GET = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#33
-Rack::HEAD = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#7
-Rack::HTTPS = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#16
-Rack::HTTP_COOKIE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#5
-Rack::HTTP_HOST = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#6
-Rack::HTTP_PORT = T.let(T.unsafe(nil), String)
-
-class Rack::Head
-  # source://rack/3.0.0/lib/rack/head.rb#10
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/head.rb#14
-  def call(env); end
-end
-
-class Rack::Headers < ::Hash
-  # source://rack/3.0.0/lib/rack/headers.rb#26
-  def [](key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#30
-  def []=(key, value); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#35
-  def assoc(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#39
-  def compare_by_identity; end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#43
-  def delete(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#47
-  def dig(key, *a); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#143
-  def except(*a); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#51
-  def fetch(key, *default, &block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#56
-  def fetch_values(*a); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#60
-  def has_key?(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#60
-  def include?(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#67
-  def invert; end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#60
-  def key?(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#60
-  def member?(key); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#73
-  def merge(hash, &block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#102
-  def merge!(hash, &block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#77
-  def reject(&block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#83
-  def replace(hash); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#88
-  def select(&block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#121
-  def slice(*a); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#30
-  def store(key, value); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#94
-  def to_proc; end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#127
-  def transform_keys(&block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#131
-  def transform_keys!; end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#98
-  def transform_values(&block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#102
-  def update(hash, &block); end
-
-  # source://rack/3.0.0/lib/rack/headers.rb#114
-  def values_at(*keys); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/headers.rb#150
-  def downcase_key(key); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/headers.rb#7
-    def [](*items); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/constants.rb#35
-Rack::LINK = T.let(T.unsafe(nil), String)
-
-class Rack::Lint
-  # source://rack/3.0.0/lib/rack/lint.rb#13
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#34
-  def call(env = T.unsafe(nil)); end
-end
-
-class Rack::Lint::LintError < ::RuntimeError; end
-
-class Rack::Lint::Wrapper
-  # source://rack/3.0.0/lib/rack/lint.rb#39
-  def initialize(app, env); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#849
-  def call(stream); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#693
-  def check_content_length(status, headers); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#677
-  def check_content_type(status, headers); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#97
-  def check_environment(env); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#491
-  def check_error(error); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#667
-  def check_header_value(key, value); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#627
-  def check_headers(headers); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#551
-  def check_hijack(env); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#579
-  def check_hijack_response(headers, env); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#387
-  def check_input(input); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#616
-  def check_status(status); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#744
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#778
-  def each; end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#820
-  def respond_to?(name, *_arg1); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#54
-  def response; end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#836
-  def to_ary; end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#706
-  def verify_content_length(size); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#760
-  def verify_to_path; end
-end
-
-class Rack::Lint::Wrapper::ErrorWrapper
-  # source://rack/3.0.0/lib/rack/lint.rb#501
-  def initialize(error); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#523
-  def close(*args); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#518
-  def flush; end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#506
-  def puts(str); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#511
-  def write(str); end
-end
-
-class Rack::Lint::Wrapper::InputWrapper
-  # source://rack/3.0.0/lib/rack/lint.rb#406
-  def initialize(input); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#483
-  def close(*args); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#471
-  def each(*args); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#412
-  def gets(*args); end
-
-  # source://rack/3.0.0/lib/rack/lint.rb#438
-  def read(*args); end
-end
-
-class Rack::Lint::Wrapper::StreamWrapper
-  extend ::Forwardable
-
-  # source://rack/3.0.0/lib/rack/lint.rb#884
-  def initialize(stream); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def <<(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def close(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def close_read(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def close_write(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def closed?(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def flush(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def read(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def write(*args, **_arg1, &block); end
-end
-
-# source://rack/3.0.0/lib/rack/lint.rb#877
-Rack::Lint::Wrapper::StreamWrapper::REQUIRED_METHODS = T.let(T.unsafe(nil), Array)
-
-class Rack::Lock
-  # source://rack/3.0.0/lib/rack/lock.rb#9
-  def initialize(app, mutex = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/lock.rb#13
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/lock.rb#25
-  def unlock; end
-end
-
-class Rack::Logger
-  # source://rack/3.0.0/lib/rack/logger.rb#10
-  def initialize(app, level = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/logger.rb#14
-  def call(env); end
-end
-
-class Rack::MediaType
-  class << self
-    # source://rack/3.0.0/lib/rack/media_type.rb#26
-    def params(content_type); end
-
-    # source://rack/3.0.0/lib/rack/media_type.rb#16
-    def type(content_type); end
-
-    private
-
-    # source://rack/3.0.0/lib/rack/media_type.rb#38
-    def strip_doublequotes(str); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/media_type.rb#7
-Rack::MediaType::SPLIT_PATTERN = T.let(T.unsafe(nil), Regexp)
-
-class Rack::MethodOverride
-  # source://rack/3.0.0/lib/rack/method_override.rb#15
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/method_override.rb#19
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/method_override.rb#31
-  def method_override(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/method_override.rb#44
-  def allowed_methods; end
-
-  # source://rack/3.0.0/lib/rack/method_override.rb#48
-  def method_override_param(req); end
-end
-
-# source://rack/3.0.0/lib/rack/method_override.rb#13
-Rack::MethodOverride::ALLOWED_METHODS = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/method_override.rb#9
-Rack::MethodOverride::HTTP_METHODS = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/method_override.rb#12
-Rack::MethodOverride::HTTP_METHOD_OVERRIDE_HEADER = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/method_override.rb#11
-Rack::MethodOverride::METHOD_OVERRIDE_PARAM_KEY = T.let(T.unsafe(nil), String)
-
-module Rack::Mime
-  private
-
-  # source://rack/3.0.0/lib/rack/mime.rb#30
-  def match?(value, matcher); end
-
-  # source://rack/3.0.0/lib/rack/mime.rb#18
-  def mime_type(ext, fallback = T.unsafe(nil)); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/mime.rb#30
-    def match?(value, matcher); end
-
-    # source://rack/3.0.0/lib/rack/mime.rb#18
-    def mime_type(ext, fallback = T.unsafe(nil)); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/mime.rb#51
-Rack::Mime::MIME_TYPES = T.let(T.unsafe(nil), Hash)
-
-class Rack::MockRequest
-  # source://rack/3.0.0/lib/rack/mock_request.rb#49
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#62
-  def delete(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#54
-  def get(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#64
-  def head(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#66
-  def options(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#60
-  def patch(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#56
-  def post(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#58
-  def put(uri, opts = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#71
-  def request(method = T.unsafe(nil), uri = T.unsafe(nil), opts = T.unsafe(nil)); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/mock_request.rb#103
-    def env_for(uri = T.unsafe(nil), opts = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/mock_request.rb#89
-    def parse_uri_rfc2396(uri); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/mock_request.rb#44
-Rack::MockRequest::DEFAULT_ENV = T.let(T.unsafe(nil), Hash)
-
-class Rack::MockRequest::FatalWarner
-  # source://rack/3.0.0/lib/rack/mock_request.rb#36
-  def flush; end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#28
-  def puts(warning); end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#39
-  def string; end
-
-  # source://rack/3.0.0/lib/rack/mock_request.rb#32
-  def write(warning); end
-end
-
-class Rack::MockRequest::FatalWarning < ::RuntimeError; end
-
-class Rack::MockResponse < ::Rack::Response
-  # source://rack/3.0.0/lib/rack/mock_response.rb#24
-  def initialize(status, headers, body, errors = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#39
-  def =~(other); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#47
-  def body; end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#73
-  def cookie(name); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#19
-  def cookies; end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#69
-  def empty?; end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#22
-  def errors; end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#22
-  def errors=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#43
-  def match(other); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#19
-  def original_headers; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#102
-  def identify_cookie_attributes(cookie_filling); end
-
-  # source://rack/3.0.0/lib/rack/mock_response.rb#79
-  def parse_cookies_from_header; end
-
-  class << self
-    def [](*_arg0); end
-  end
-end
-
-# source://rack-test/2.0.2/lib/rack/test.rb#413
-Rack::MockSession = Rack::Test::Session
-
-module Rack::Multipart
-  class << self
-    # source://rack/3.0.0/lib/rack/multipart.rb#39
-    def build_multipart(params, first = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/multipart.rb#35
-    def extract_multipart(request, params = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/multipart.rb#17
-    def parse_multipart(env, params = T.unsafe(nil)); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#30
-Rack::Multipart::ATTRIBUTE = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#29
-Rack::Multipart::ATTRIBUTE_CHAR = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#24
-Rack::Multipart::BROKEN = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#22
-Rack::Multipart::CONDISP = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#41
-Rack::Multipart::DISPPARM = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#19
-Rack::Multipart::EOL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#37
-Rack::Multipart::EXTENDED_INITIAL_NAME = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#39
-Rack::Multipart::EXTENDED_INITIAL_PARAMETER = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#38
-Rack::Multipart::EXTENDED_INITIAL_VALUE = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#34
-Rack::Multipart::EXTENDED_OTHER_NAME = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#36
-Rack::Multipart::EXTENDED_OTHER_PARAMETER = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#35
-Rack::Multipart::EXTENDED_OTHER_VALUE = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#40
-Rack::Multipart::EXTENDED_PARAMETER = T.let(T.unsafe(nil), Regexp)
-
-class Rack::Multipart::EmptyContentError < ::EOFError; end
-class Rack::Multipart::Error < ::StandardError; end
-
-class Rack::Multipart::Generator
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#8
-  def initialize(params, first = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#16
-  def dump; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#89
-  def content_for_other(file, name); end
-
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#77
-  def content_for_tempfile(io, file, name); end
-
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#52
-  def flattened_params; end
-
-  # source://rack/3.0.0/lib/rack/multipart/generator.rb#37
-  def multipart?; end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#20
-Rack::Multipart::MULTIPART = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart.rb#14
-Rack::Multipart::MULTIPART_BOUNDARY = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#26
-Rack::Multipart::MULTIPART_CONTENT_DISPOSITION = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#27
-Rack::Multipart::MULTIPART_CONTENT_ID = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#25
-Rack::Multipart::MULTIPART_CONTENT_TYPE = T.let(T.unsafe(nil), Regexp)
-
-class Rack::Multipart::MultipartPartLimitError < ::Errno::EMFILE; end
-
-class Rack::Multipart::Parser
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#193
-  def initialize(boundary, tempfile, bufsize, query_parser); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#208
-  def parse(io); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#231
-  def result; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#191
-  def state; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#334
-  def consume_boundary; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#243
-  def dequote(str); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#343
-  def get_filename(head); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#278
-  def handle_consume_token; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#415
-  def handle_empty_content!(content); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#262
-  def handle_fast_forward; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#311
-  def handle_mime_body; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#288
-  def handle_mime_head; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#249
-  def read_data(io, outbuf); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#381
-  def tag_multipart_encoding(filename, content_type, name, body); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/multipart/parser.rb#90
-    def parse(io, content_length, content_type, tmpfile, bufsize, qp); end
-
-    # source://rack/3.0.0/lib/rack/multipart/parser.rb#83
-    def parse_boundary(content_type); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#45
-Rack::Multipart::Parser::BUFSIZE = T.let(T.unsafe(nil), Integer)
-
-class Rack::Multipart::Parser::BoundedIO
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#52
-  def initialize(io, content_length); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#58
-  def read(size, outbuf = T.unsafe(nil)); end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#378
-Rack::Multipart::Parser::CHARSET = T.let(T.unsafe(nil), String)
-
-class Rack::Multipart::Parser::Collector
-  include ::Enumerable
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#146
-  def initialize(tempfile); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#152
-  def each; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#172
-  def on_mime_body(mime_index, content); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#176
-  def on_mime_finish(mime_index); end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#156
-  def on_mime_head(mime_index, head, filename, content_type, name); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#181
-  def check_open_files; end
-end
-
-class Rack::Multipart::Parser::Collector::BufferPart < ::Rack::Multipart::Parser::Collector::MimePart
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#136
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#135
-  def file?; end
-end
-
-class Rack::Multipart::Parser::Collector::MimePart < ::Struct
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#112
-  def get_data; end
-end
-
-class Rack::Multipart::Parser::Collector::TempfilePart < ::Rack::Multipart::Parser::Collector::MimePart
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#141
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/multipart/parser.rb#140
-  def file?; end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#81
-Rack::Multipart::Parser::EMPTY = T.let(T.unsafe(nil), Rack::Multipart::Parser::MultipartInfo)
-
-class Rack::Multipart::Parser::MultipartInfo < ::Struct
-  def params; end
-  def params=(_); end
-  def tmp_files; end
-  def tmp_files=(_); end
-
-  class << self
-    def [](*_arg0); end
-    def inspect; end
-    def keyword_init?; end
-    def members; end
-    def new(*_arg0); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#47
-Rack::Multipart::Parser::TEMPFILE_FACTORY = T.let(T.unsafe(nil), Proc)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#46
-Rack::Multipart::Parser::TEXT_PLAIN = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#33
-Rack::Multipart::REGULAR_PARAMETER = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#32
-Rack::Multipart::REGULAR_PARAMETER_NAME = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#42
-Rack::Multipart::RFC2183 = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#31
-Rack::Multipart::SECTION = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#21
-Rack::Multipart::TOKEN = T.let(T.unsafe(nil), Regexp)
-
-class Rack::Multipart::UploadedFile
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#16
-  def initialize(filepath = T.unsafe(nil), ct = T.unsafe(nil), bin = T.unsafe(nil), path: T.unsafe(nil), content_type: T.unsafe(nil), binary: T.unsafe(nil), filename: T.unsafe(nil), io: T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#14
-  def content_type; end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#14
-  def content_type=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#31
-  def local_path; end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#40
-  def method_missing(method_name, *args, &block); end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#11
-  def original_filename; end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#31
-  def path; end
-
-  # source://rack/3.0.0/lib/rack/multipart/uploaded_file.rb#36
-  def respond_to?(*args); end
-end
-
-# source://rack/3.0.0/lib/rack/multipart/parser.rb#23
-Rack::Multipart::VALUE = T.let(T.unsafe(nil), Regexp)
-
-class Rack::NullLogger
-  # source://rack/3.0.0/lib/rack/null_logger.rb#7
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#45
-  def <<(msg); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#43
-  def add(severity, message = T.unsafe(nil), progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#11
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#42
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#34
-  def datetime_format; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#39
-  def datetime_format=(datetime_format); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#17
-  def debug(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#27
-  def debug!; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#23
-  def debug?; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#19
-  def error(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#28
-  def error!; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#25
-  def error?; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#20
-  def fatal(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#29
-  def fatal!; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#26
-  def fatal?; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#35
-  def formatter; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#40
-  def formatter=(formatter); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#16
-  def info(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#30
-  def info!; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#22
-  def info?; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#32
-  def level; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#37
-  def level=(level); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#44
-  def log(severity, message = T.unsafe(nil), progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#33
-  def progname; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#38
-  def progname=(progname); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#46
-  def reopen(logdev = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#36
-  def sev_threshold; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#41
-  def sev_threshold=(sev_threshold); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#21
-  def unknown(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#18
-  def warn(progname = T.unsafe(nil), &block); end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#31
-  def warn!; end
-
-  # source://rack/3.0.0/lib/rack/null_logger.rb#24
-  def warn?; end
-end
-
-# source://rack/3.0.0/lib/rack/constants.rb#34
-Rack::OPTIONS = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#31
-Rack::PATCH = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#8
-Rack::PATH_INFO = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#29
-Rack::POST = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#30
-Rack::PUT = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#12
-Rack::QUERY_STRING = T.let(T.unsafe(nil), String)
-
-class Rack::QueryParser
-  # source://rack/3.0.0/lib/rack/query_parser.rb#31
-  def initialize(params_class, _key_space_limit = T.unsafe(nil), param_depth_limit); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#167
-  def make_params; end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#171
-  def new_depth_limit(param_depth_limit); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#93
-  def normalize_params(params, name, v, _depth = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#29
-  def param_depth_limit; end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#72
-  def parse_nested_query(qs, separator = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#44
-  def parse_query(qs, separator = T.unsafe(nil), &unescaper); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#97
-  def _normalize_params(params, name, v, depth); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#181
-  def params_hash_has_key?(hash, key); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#177
-  def params_hash_type?(obj); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#193
-  def unescape(s); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/query_parser.rb#21
-    def make_default(_key_space_limit = T.unsafe(nil), param_depth_limit); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/query_parser.rb#6
-Rack::QueryParser::COMMON_SEP = T.let(T.unsafe(nil), Hash)
-
-# source://rack/3.0.0/lib/rack/query_parser.rb#5
-Rack::QueryParser::DEFAULT_SEP = T.let(T.unsafe(nil), Regexp)
-
-class Rack::QueryParser::InvalidParameterError < ::ArgumentError; end
-class Rack::QueryParser::ParameterTypeError < ::TypeError; end
-
-class Rack::QueryParser::Params
-  # source://rack/3.0.0/lib/rack/query_parser.rb#198
-  def initialize; end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#203
-  def [](key); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#207
-  def []=(key, value); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#211
-  def key?(key); end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#233
-  def to_h; end
-
-  # source://rack/3.0.0/lib/rack/query_parser.rb#233
-  def to_params_hash; end
-end
-
-class Rack::QueryParser::ParamsTooDeepError < ::RangeError; end
-
-# source://rack/3.0.0/lib/rack/constants.rb#42
-Rack::RACK_ERRORS = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#49
-Rack::RACK_HIJACK = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#44
-Rack::RACK_INPUT = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#50
-Rack::RACK_IS_HIJACK = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#43
-Rack::RACK_LOGGER = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#62
-Rack::RACK_METHODOVERRIDE_ORIGINAL_METHOD = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#52
-Rack::RACK_MULTIPART_BUFFER_SIZE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#53
-Rack::RACK_MULTIPART_TEMPFILE_FACTORY = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#51
-Rack::RACK_RECURSIVE_INCLUDE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#58
-Rack::RACK_REQUEST_COOKIE_HASH = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#59
-Rack::RACK_REQUEST_COOKIE_STRING = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#56
-Rack::RACK_REQUEST_FORM_HASH = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#55
-Rack::RACK_REQUEST_FORM_INPUT = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#57
-Rack::RACK_REQUEST_FORM_VARS = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#60
-Rack::RACK_REQUEST_QUERY_HASH = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#61
-Rack::RACK_REQUEST_QUERY_STRING = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#54
-Rack::RACK_RESPONSE_FINISHED = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#45
-Rack::RACK_SESSION = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#46
-Rack::RACK_SESSION_OPTIONS = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#47
-Rack::RACK_SHOWSTATUS_DETAIL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#41
-Rack::RACK_TEMPFILES = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#48
-Rack::RACK_URL_SCHEME = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#40
-Rack::RACK_VERSION = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/version.rb#28
-Rack::RELEASE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#9
-Rack::REQUEST_METHOD = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#10
-Rack::REQUEST_PATH = T.let(T.unsafe(nil), String)
-
-class Rack::Recursive
-  # source://rack/3.0.0/lib/rack/recursive.rb#37
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/recursive.rb#45
-  def _call(env); end
-
-  # source://rack/3.0.0/lib/rack/recursive.rb#41
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/recursive.rb#52
-  def include(env, path); end
-end
-
-class Rack::Reloader
-  # source://rack/3.0.0/lib/rack/reloader.rb#25
-  def initialize(app, cooldown = T.unsafe(nil), backend = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/reloader.rb#36
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/reloader.rb#50
-  def reload!(stderr = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/reloader.rb#58
-  def safe_load(file, mtime, stderr = T.unsafe(nil)); end
-end
-
-module Rack::Reloader::Stat
-  # source://rack/3.0.0/lib/rack/reloader.rb#88
-  def figure_path(file, paths); end
-
-  # source://rack/3.0.0/lib/rack/reloader.rb#69
-  def rotation; end
-
-  # source://rack/3.0.0/lib/rack/reloader.rb#103
-  def safe_stat(file); end
-end
-
 # @private
+#
+# source://yard//lib/yard/server/rack_adapter.rb#85
 class Rack::Request
-  include ::Rack::Request::Env
-  include ::Rack::Request::Helpers
-
   # source://rack/3.0.0/lib/rack/request.rb#62
   def initialize(env); end
 
@@ -2626,1423 +782,6 @@ end
 # source://rack/3.0.0/lib/rack/request.rb#60
 Rack::Request::ALLOWED_SCHEMES = T.let(T.unsafe(nil), Array)
 
-module Rack::Request::Env
-  # source://rack/3.0.0/lib/rack/request.rb#86
-  def initialize(env); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#129
-  def add_header(key, v); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#140
-  def delete_header(name); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#111
-  def each_header(&block); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#84
-  def env; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#106
-  def fetch_header(name, &block); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#100
-  def get_header(name); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#95
-  def has_header?(name); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#116
-  def set_header(name, v); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/request.rb#144
-  def initialize_copy(other); end
-end
-
-module Rack::Request::Helpers
-  # source://rack/3.0.0/lib/rack/request.rb#484
-  def GET; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#498
-  def POST; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#589
-  def [](key); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#598
-  def []=(key, value); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#576
-  def accept_encoding; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#580
-  def accept_language; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#266
-  def authority; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#559
-  def base_url; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#190
-  def body; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#458
-  def content_charset; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#199
-  def content_length; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#308
-  def content_type; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#293
-  def cookies; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#220
-  def delete?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#554
-  def delete_param(k); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#470
-  def form_data?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#393
-  def forwarded_authority; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#353
-  def forwarded_for; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#374
-  def forwarded_port; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#572
-  def fullpath; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#223
-  def get?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#226
-  def head?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#333
-  def host; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#318
-  def host_authority; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#322
-  def host_with_port(authority = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#341
-  def hostname; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#414
-  def ip; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#232
-  def link?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#200
-  def logger; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#441
-  def media_type; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#450
-  def media_type_params; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#229
-  def options?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#525
-  def params; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#479
-  def parseable_data?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#235
-  def patch?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#568
-  def path; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#194
-  def path_info; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#195
-  def path_info=(s); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#345
-  def port; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#238
-  def post?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#241
-  def put?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#198
-  def query_string; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#204
-  def referer; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#204
-  def referrer; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#197
-  def request_method; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#249
-  def scheme; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#191
-  def script_name; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#192
-  def script_name=(s); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#272
-  def server_authority; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#285
-  def server_name; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#289
-  def server_port; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#207
-  def session; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#213
-  def session_options; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#410
-  def ssl?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#244
-  def trace?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#584
-  def trusted_proxy?(ip); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#247
-  def unlink?; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#534
-  def update_param(k, v); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#564
-  def url; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#201
-  def user_agent; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#605
-  def values_at(*keys); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#313
-  def xhr?; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/request.rb#737
-  def allowed_scheme(header); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#611
-  def default_session; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#741
-  def forwarded_priority; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#713
-  def forwarded_scheme; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#639
-  def get_http_forwarded(token); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#627
-  def parse_http_accept_header(header); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#651
-  def parse_multipart; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#647
-  def parse_query(qs, d = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#643
-  def query_parser; end
-
-  # source://rack/3.0.0/lib/rack/request.rb#704
-  def reject_trusted_ip_addresses(ip_addresses); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#698
-  def split_authority(authority); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#655
-  def split_header(value); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#614
-  def wrap_ipv6(host); end
-
-  # source://rack/3.0.0/lib/rack/request.rb#745
-  def x_forwarded_proto_priority; end
-end
-
-# source://rack/3.0.0/lib/rack/request.rb#168
-Rack::Request::Helpers::DEFAULT_PORTS = T.let(T.unsafe(nil), Hash)
-
-# source://rack/3.0.0/lib/rack/request.rb#153
-Rack::Request::Helpers::FORM_DATA_MEDIA_TYPES = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/request.rb#176
-Rack::Request::Helpers::HTTP_FORWARDED = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#171
-Rack::Request::Helpers::HTTP_X_FORWARDED_FOR = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#174
-Rack::Request::Helpers::HTTP_X_FORWARDED_HOST = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#185
-Rack::Request::Helpers::HTTP_X_FORWARDED_PORT = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#182
-Rack::Request::Helpers::HTTP_X_FORWARDED_PROTO = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#179
-Rack::Request::Helpers::HTTP_X_FORWARDED_SCHEME = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#188
-Rack::Request::Helpers::HTTP_X_FORWARDED_SSL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/request.rb#161
-Rack::Request::Helpers::PARSEABLE_DATA_MEDIA_TYPES = T.let(T.unsafe(nil), Array)
-
-class Rack::Response
-  include ::Rack::Response::Helpers
-
-  # source://rack/3.0.0/lib/rack/response.rb#61
-  def initialize(body = T.unsafe(nil), status = T.unsafe(nil), headers = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#158
-  def [](key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#162
-  def []=(key, value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def body; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def body=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#101
-  def chunked?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#146
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#166
-  def delete_header(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#126
-  def each(&callback); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#150
-  def empty?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#108
-  def finish(&block); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#158
-  def get_header(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#154
-  def has_header?(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#35
-  def header; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#32
-  def headers; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def length; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def length=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#96
-  def redirect(target, status = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#162
-  def set_header(key, value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def status; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#31
-  def status=(_arg0); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#108
-  def to_a(&block); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#140
-  def write(chunk); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/response.rb#24
-    def [](status, headers, body); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/response.rb#28
-Rack::Response::CHUNKED = T.let(T.unsafe(nil), String)
-
-module Rack::Response::Helpers
-  # source://rack/3.0.0/lib/rack/response.rb#185
-  def accepted?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#213
-  def add_header(key, value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#188
-  def bad_request?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#301
-  def cache!(duration = T.unsafe(nil), directive: T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#284
-  def cache_control; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#288
-  def cache_control=(value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#180
-  def client_error?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#251
-  def content_length; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#234
-  def content_type; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#239
-  def content_type=(content_type); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#184
-  def created?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#268
-  def delete_cookie(key, value = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#293
-  def do_not_cache!; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#308
-  def etag; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#312
-  def etag=(value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#190
-  def forbidden?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#200
-  def include?(header); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#177
-  def informational?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#175
-  def invalid?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#256
-  def location; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#260
-  def location=(location); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#243
-  def media_type; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#247
-  def media_type_params; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#192
-  def method_not_allowed?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#187
-  def moved_permanently?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#186
-  def no_content?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#193
-  def not_acceptable?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#191
-  def not_found?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#183
-  def ok?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#195
-  def precondition_failed?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#198
-  def redirect?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#179
-  def redirection?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#194
-  def request_timeout?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#181
-  def server_error?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#264
-  def set_cookie(key, value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#276
-  def set_cookie_header; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#280
-  def set_cookie_header=(value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#178
-  def successful?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#189
-  def unauthorized?; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#196
-  def unprocessable?; end
-
-  protected
-
-  # source://rack/3.0.0/lib/rack/response.rb#346
-  def append(chunk); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#318
-  def buffered_body!; end
-end
-
-class Rack::Response::Raw
-  include ::Rack::Response::Helpers
-
-  # source://rack/3.0.0/lib/rack/response.rb#366
-  def initialize(status, headers); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#383
-  def delete_header(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#375
-  def get_header(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#371
-  def has_header?(key); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#363
-  def headers; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#379
-  def set_header(key, value); end
-
-  # source://rack/3.0.0/lib/rack/response.rb#364
-  def status; end
-
-  # source://rack/3.0.0/lib/rack/response.rb#364
-  def status=(_arg0); end
-end
-
-# source://rack/3.0.0/lib/rack/response.rb#29
-Rack::Response::STATUS_WITH_NO_ENTITY_BODY = T.let(T.unsafe(nil), Hash)
-
-class Rack::RewindableInput
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#29
-  def initialize(io); end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#65
-  def close; end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#45
-  def each(&block); end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#35
-  def gets; end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#40
-  def read(*args); end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#50
-  def rewind; end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#55
-  def size; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#109
-  def filesystem_has_posix_semantics?; end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#78
-  def make_rewindable; end
-end
-
-class Rack::RewindableInput::Middleware
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#19
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/rewindable_input.rb#23
-  def call(env); end
-end
-
-class Rack::Runtime
-  # source://rack/3.0.0/lib/rack/runtime.rb#16
-  def initialize(app, name = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/runtime.rb#22
-  def call(env); end
-end
-
-# source://rack/3.0.0/lib/rack/runtime.rb#13
-Rack::Runtime::FORMAT_STRING = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/runtime.rb#14
-Rack::Runtime::HEADER_NAME = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#11
-Rack::SCRIPT_NAME = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#14
-Rack::SERVER_NAME = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#15
-Rack::SERVER_PORT = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#13
-Rack::SERVER_PROTOCOL = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#24
-Rack::SET_COOKIE = T.let(T.unsafe(nil), String)
-
-class Rack::Sendfile
-  # source://rack/3.0.0/lib/rack/sendfile.rb#105
-  def initialize(app, variation = T.unsafe(nil), mappings = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/sendfile.rb#113
-  def call(env); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/sendfile.rb#154
-  def map_accel_path(env, path); end
-
-  # source://rack/3.0.0/lib/rack/sendfile.rb#148
-  def variation(env); end
-end
-
-class Rack::ShowExceptions
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#22
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#26
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#61
-  def dump_exception(exception); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#112
-  def h(obj); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#52
-  def prefers_plaintext?(env); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#72
-  def pretty(env, exception); end
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#108
-  def template; end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/show_exceptions.rb#56
-  def accepts_html?(env); end
-end
-
-# source://rack/3.0.0/lib/rack/show_exceptions.rb#20
-Rack::ShowExceptions::CONTEXT = T.let(T.unsafe(nil), Integer)
-
-# source://rack/3.0.0/lib/rack/show_exceptions.rb#127
-Rack::ShowExceptions::TEMPLATE = T.let(T.unsafe(nil), ERB)
-
-class Rack::ShowStatus
-  # source://rack/3.0.0/lib/rack/show_status.rb#19
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/show_status.rb#24
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/show_status.rb#54
-  def h(obj); end
-end
-
-# source://rack/3.0.0/lib/rack/show_status.rb#69
-Rack::ShowStatus::TEMPLATE = T.let(T.unsafe(nil), String)
-
-class Rack::Static
-  # source://rack/3.0.0/lib/rack/static.rb#93
-  def initialize(app, options = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#109
-  def add_index_root?(path); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#166
-  def applicable_rules(path); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#125
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#121
-  def can_serve(path); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#113
-  def overwrite_file_path(path); end
-
-  # source://rack/3.0.0/lib/rack/static.rb#117
-  def route_file(path); end
-end
-
-# source://rack/3.0.0/lib/rack/constants.rb#37
-Rack::TRACE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#25
-Rack::TRANSFER_ENCODING = T.let(T.unsafe(nil), String)
-
-class Rack::TempfileReaper
-  # source://rack/3.0.0/lib/rack/tempfile_reaper.rb#12
-  def initialize(app); end
-
-  # source://rack/3.0.0/lib/rack/tempfile_reaper.rb#16
-  def call(env); end
-end
-
-module Rack::Test
-  class << self
-    # source://rack-test/2.0.2/lib/rack/test.rb#407
-    def encoding_aware_strings?; end
-  end
-end
-
-class Rack::Test::Cookie
-  include ::Rack::Utils
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#23
-  def initialize(raw, uri = T.unsafe(nil), default_host = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#107
-  def <=>(other); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#58
-  def domain; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#53
-  def empty?; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#85
-  def expired?; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#80
-  def expires; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#70
-  def http_only?; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#102
-  def matches?(uri); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#14
-  def name; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#75
-  def path; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#21
-  def raw; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#48
-  def replaces?(other); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#64
-  def secure?; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#112
-  def to_h; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#112
-  def to_hash; end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#90
-  def valid?(uri); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#17
-  def value; end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#124
-  def default_uri; end
-end
-
-class Rack::Test::CookieJar
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#136
-  def initialize(cookies = T.unsafe(nil), default_host = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#192
-  def <<(new_cookie); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#143
-  def [](name); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#153
-  def []=(name, value); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#167
-  def delete(name); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#203
-  def for(uri); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#159
-  def get_cookie(name); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#177
-  def merge(raw_cookies, uri = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#220
-  def to_hash; end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#239
-  def each_cookie_for(uri); end
-end
-
-# source://rack-test/2.0.2/lib/rack/test/cookie_jar.rb#134
-Rack::Test::CookieJar::DELIMITER = T.let(T.unsafe(nil), String)
-
-# source://rack-test/2.0.2/lib/rack/test.rb#33
-Rack::Test::DEFAULT_HOST = T.let(T.unsafe(nil), String)
-
-# source://rack-test/2.0.2/lib/rack/test.rb#42
-Rack::Test::END_BOUNDARY = T.let(T.unsafe(nil), String)
-
-class Rack::Test::Error < ::StandardError; end
-
-# source://rack-test/2.0.2/lib/rack/test.rb#36
-Rack::Test::MULTIPART_BOUNDARY = T.let(T.unsafe(nil), String)
-
-module Rack::Test::Methods
-  extend ::Forwardable
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#91
-  def _rack_test_current_session=(_arg0); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def authorize(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def basic_authorize(*args, **_arg1, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#40
-  def build_rack_test_session(_name); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def clear_cookies(*args, **_arg1, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#51
-  def current_session; end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def custom_request(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def delete(*args, **_arg1, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#64
-  def digest_authorize(username, password); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def env(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def follow_redirect!(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def get(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def head(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def header(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def last_request(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def last_response(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def options(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def patch(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def post(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def put(*args, **_arg1, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#29
-  def rack_mock_session(name = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#29
-  def rack_test_session(name = T.unsafe(nil)); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def request(*args, **_arg1, &block); end
-
-  # source://forwardable/1.3.2/forwardable.rb#229
-  def set_cookie(*args, **_arg1, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#57
-  def with_session(name); end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test/methods.rb#91
-  def _rack_test_current_session; end
-end
-
-# source://rack-test/2.0.2/lib/rack/test.rb#39
-Rack::Test::START_BOUNDARY = T.let(T.unsafe(nil), String)
-
-class Rack::Test::Session
-  include ::Rack::Utils
-  include ::Rack::Test::Utils
-  extend ::Forwardable
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#99
-  def initialize(app, default_host = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#217
-  def _digest_authorize(username, password); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#120
-  def after_request(&block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#200
-  def authorize(username, password); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#200
-  def basic_authorize(username, password); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#125
-  def clear_cookies; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#67
-  def cookie_jar; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#67
-  def cookie_jar=(_arg0); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#162
-  def custom_request(verb, uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#70
-  def default_host; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def delete(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#213
-  def digest_authorize(username, password); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#187
-  def env(name, value); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#226
-  def follow_redirect!; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def get(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def head(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#175
-  def header(name, value); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#136
-  def last_request; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#143
-  def last_response; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def options(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def patch(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def post(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#113
-  def put(uri, params = T.unsafe(nil), env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#152
-  def request(uri, env = T.unsafe(nil), &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#130
-  def set_cookie(cookie, uri = T.unsafe(nil)); end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#338
-  def append_query_params(query_array, query_params); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#264
-  def close_body(body); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#401
-  def digest_auth_configured?; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#378
-  def digest_auth_header; end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#291
-  def env_for(uri, env); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#344
-  def multipart_content_type(env); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#269
-  def parse_uri(path, env); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#355
-  def process_request(uri, env); end
-
-  # source://rack-test/2.0.2/lib/rack/test.rb#395
-  def retry_with_digest_auth?(env); end
-
-  class << self
-    # source://rack-test/2.0.2/lib/rack/test.rb#57
-    def new(app, default_host = T.unsafe(nil)); end
-  end
-end
-
-class Rack::Test::UploadedFile
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#31
-  def initialize(content, content_type = T.unsafe(nil), binary = T.unsafe(nil), original_filename: T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#58
-  def append_to(buffer); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#22
-  def content_type; end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#22
-  def content_type=(_arg0); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#44
-  def local_path; end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#50
-  def method_missing(method_name, *args, &block); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#16
-  def original_filename; end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#44
-  def path; end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#19
-  def tempfile; end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#94
-  def initialize_from_file_path(path); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#88
-  def initialize_from_stringio(stringio, original_filename); end
-
-  # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#69
-  def respond_to_missing?(method_name, include_private = T.unsafe(nil)); end
-
-  class << self
-    # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#80
-    def actually_finalize(file); end
-
-    # source://rack-test/2.0.2/lib/rack/test/uploaded_file.rb#74
-    def finalize(file); end
-  end
-end
-
-module Rack::Test::Utils
-  include ::Rack::Utils
-  extend ::Rack::Utils
-  extend ::Rack::Test::Utils
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#34
-  def build_multipart(params, _first = T.unsafe(nil), multipart = T.unsafe(nil)); end
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#11
-  def build_nested_query(value, prefix = T.unsafe(nil)); end
-
-  private
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#100
-  def _build_parts(buffer, parameters); end
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#133
-  def build_file_part(buffer, parameter_name, uploaded_file); end
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#94
-  def build_parts(buffer, parameters); end
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#121
-  def build_primitive_part(buffer, parameter_name, value); end
-
-  # source://rack-test/2.0.2/lib/rack/test/utils.rb#62
-  def normalize_multipart_params(params, first = T.unsafe(nil)); end
-end
-
-# source://rack-test/2.0.2/lib/rack/test/version.rb#3
-Rack::Test::VERSION = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/constants.rb#36
-Rack::UNLINK = T.let(T.unsafe(nil), String)
-
-class Rack::URLMap
-  # source://rack/3.0.0/lib/rack/urlmap.rb#21
-  def initialize(map = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/urlmap.rb#48
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/urlmap.rb#25
-  def remap(map); end
-
-  private
-
-  # source://rack/3.0.0/lib/rack/urlmap.rb#87
-  def casecmp?(v1, v2); end
-end
-
-module Rack::Utils
-  private
-
-  # source://rack/3.0.0/lib/rack/utils.rb#243
-  def add_cookie_to_header(header, key, value); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#378
-  def add_remove_cookie_to_header(header, key, value = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#162
-  def best_q_match(q_value_header, available_mimes); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#116
-  def build_nested_query(value, prefix = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#106
-  def build_query(params); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#420
-  def byte_ranges(env, size); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#620
-  def clean_path_info(path_info); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#87
-  def clock_time; end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#372
-  def delete_cookie_header!(headers, key, value = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#362
-  def delete_set_cookie_header(key, value = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#402
-  def delete_set_cookie_header!(header, key, value = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#38
-  def escape(s); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#187
-  def escape_html(string); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#44
-  def escape_path(s); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#145
-  def forwarded_values(forwarded_header); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#424
-  def get_byte_ranges(http_range, size); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#366
-  def make_delete_cookie_header(header, key, value); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#267
-  def parse_cookies(env); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#233
-  def parse_cookies_header(value); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#102
-  def parse_nested_query(qs, d = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#98
-  def parse_query(qs, d = T.unsafe(nil), &unescaper); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#134
-  def q_values(q_value_header); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#413
-  def rfc2822(time); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#460
-  def secure_compare(a, b); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#191
-  def select_best_encoding(available_encodings, accept_encoding); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#294
-  def set_cookie_header(key, value); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#336
-  def set_cookie_header!(headers, key, value); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#610
-  def status_code(status); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#56
-  def unescape(s, encoding = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#50
-  def unescape_path(s); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#637
-  def valid_path?(path); end
-
-  class << self
-    # source://rack/3.0.0/lib/rack/utils.rb#243
-    def add_cookie_to_header(header, key, value); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#378
-    def add_remove_cookie_to_header(header, key, value = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#162
-    def best_q_match(q_value_header, available_mimes); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#116
-    def build_nested_query(value, prefix = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#106
-    def build_query(params); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#420
-    def byte_ranges(env, size); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#620
-    def clean_path_info(path_info); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#87
-    def clock_time; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#28
-    def default_query_parser; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#28
-    def default_query_parser=(_arg0); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#372
-    def delete_cookie_header!(headers, key, value = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#362
-    def delete_set_cookie_header(key, value = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#402
-    def delete_set_cookie_header!(header, key, value = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#38
-    def escape(s); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#187
-    def escape_html(string); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#44
-    def escape_path(s); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#145
-    def forwarded_values(forwarded_header); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#424
-    def get_byte_ranges(http_range, size); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#77
-    def key_space_limit; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#82
-    def key_space_limit=(v); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#366
-    def make_delete_cookie_header(header, key, value); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#61
-    def multipart_part_limit; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#61
-    def multipart_part_limit=(_arg0); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#69
-    def param_depth_limit; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#73
-    def param_depth_limit=(v); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#267
-    def parse_cookies(env); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#233
-    def parse_cookies_header(value); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#102
-    def parse_nested_query(qs, d = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#98
-    def parse_query(qs, d = T.unsafe(nil), &unescaper); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#134
-    def q_values(q_value_header); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#413
-    def rfc2822(time); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#460
-    def secure_compare(a, b); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#191
-    def select_best_encoding(available_encodings, accept_encoding); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#294
-    def set_cookie_header(key, value); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#336
-    def set_cookie_header!(headers, key, value); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#610
-    def status_code(status); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#56
-    def unescape(s, encoding = T.unsafe(nil)); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#50
-    def unescape_path(s); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#637
-    def valid_path?(path); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/utils.rb#24
-Rack::Utils::COMMON_SEP = T.let(T.unsafe(nil), Hash)
-
-class Rack::Utils::Context
-  # source://rack/3.0.0/lib/rack/utils.rb#486
-  def initialize(app_f, app_r); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#484
-  def app; end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#491
-  def call(env); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#499
-  def context(env, app = T.unsafe(nil)); end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#484
-  def for; end
-
-  # source://rack/3.0.0/lib/rack/utils.rb#495
-  def recontext(app); end
-end
-
-# source://rack/3.0.0/lib/rack/utils.rb#23
-Rack::Utils::DEFAULT_SEP = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/utils.rb#175
-Rack::Utils::ESCAPE_HTML = T.let(T.unsafe(nil), Hash)
-
-# source://rack/3.0.0/lib/rack/utils.rb#184
-Rack::Utils::ESCAPE_HTML_PATTERN = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/utils.rb#537
-Rack::Utils::HTTP_STATUS_CODES = T.let(T.unsafe(nil), Hash)
-
-class Rack::Utils::HeaderHash < ::Hash
-  class << self
-    # source://rack/3.0.0/lib/rack/utils.rb#509
-    def [](headers); end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#527
-    def allocate; end
-
-    # source://rack/3.0.0/lib/rack/utils.rb#520
-    def new(hash = T.unsafe(nil)); end
-  end
-end
-
-# source://rack/3.0.0/lib/rack/utils.rb#21
-Rack::Utils::InvalidParameterError = Rack::QueryParser::InvalidParameterError
-
-# source://rack/3.0.0/lib/rack/utils.rb#25
-Rack::Utils::KeySpaceConstrainedParams = Rack::QueryParser::Params
-
-# source://rack/3.0.0/lib/rack/utils.rb#635
-Rack::Utils::NULL_BYTE = T.let(T.unsafe(nil), String)
-
-# source://rack/3.0.0/lib/rack/utils.rb#618
-Rack::Utils::PATH_SEPS = T.let(T.unsafe(nil), Regexp)
-
-# source://rack/3.0.0/lib/rack/utils.rb#20
-Rack::Utils::ParameterTypeError = Rack::QueryParser::ParameterTypeError
-
-# source://rack/3.0.0/lib/rack/utils.rb#22
-Rack::Utils::ParamsTooDeepError = Rack::QueryParser::ParamsTooDeepError
-
-# source://rack/3.0.0/lib/rack/utils.rb#604
-Rack::Utils::STATUS_WITH_NO_ENTITY_BODY = T.let(T.unsafe(nil), Hash)
-
-# source://rack/3.0.0/lib/rack/utils.rb#606
-Rack::Utils::SYMBOL_TO_STATUS_CODE = T.let(T.unsafe(nil), Hash)
-
-# source://rack/3.0.0/lib/rack/version.rb#16
-Rack::VERSION = T.let(T.unsafe(nil), Array)
-
-# source://rack/3.0.0/lib/rack/version.rb#19
-Rack::VERSION_STRING = T.let(T.unsafe(nil), String)
-
 # source://yard//lib/yard/core_ext/string.rb#2
 class String
   include ::Comparable
@@ -4056,6 +795,12 @@ class String
   # source://yard//lib/yard/core_ext/string.rb#8
   def shell_split; end
 end
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/object/blank.rb#104
+String::BLANK_RE = T.let(T.unsafe(nil), Regexp)
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/object/blank.rb#105
+String::ENCODED_BLANKS = T.let(T.unsafe(nil), Concurrent::Map)
 
 # A subclass of Hash where all keys are converted into Symbols, and
 # optionally, all String values are converted into Symbols.
@@ -4148,6 +893,8 @@ class SymbolHash < ::Hash
 end
 
 # @private
+#
+# source://yard//lib/yard/server/webrick_adapter.rb#42
 class WEBrick::HTTPRequest
   # Returns the value of attribute version_supplied.
   #
@@ -4326,6 +1073,8 @@ end
 # @see Command
 # @see commands
 # @see default_command
+#
+# source://yard//lib/yard/cli/command_parser.rb#23
 class YARD::CLI::CommandParser
   # @return [CommandParser] a new instance of CommandParser
   #
@@ -4385,6 +1134,8 @@ end
 # CLI command to view or edit configuration options
 #
 # @since 0.6.2
+#
+# source://yard//lib/yard/cli/config.rb#7
 class YARD::CLI::Config < ::YARD::CLI::Command
   # @return [Config] a new instance of Config
   # @since 0.6.2
@@ -4518,6 +1269,8 @@ end
 # of a project (library, gem, working copy).
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/diff.rb#11
 class YARD::CLI::Diff < ::YARD::CLI::Command
   # @return [Diff] a new instance of Diff
   # @since 0.6.0
@@ -4601,6 +1354,8 @@ end
 # Display one object
 #
 # @since 0.8.6
+#
+# source://yard//lib/yard/cli/display.rb#6
 class YARD::CLI::Display < ::YARD::CLI::Yardoc
   # @return [Display] a new instance of Display
   # @since 0.8.6
@@ -4649,6 +1404,8 @@ class YARD::CLI::Display < ::YARD::CLI::Yardoc
 end
 
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/gems.rb#5
 class YARD::CLI::Gems < ::YARD::CLI::Command
   # @return [Gems] a new instance of Gems
   # @since 0.6.0
@@ -4698,6 +1455,8 @@ end
 #
 # @see Graph#run
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/graph.rb#27
 class YARD::CLI::Graph < ::YARD::CLI::YardoptsCommand
   # Creates a new instance of the command-line utility
   #
@@ -4756,6 +1515,8 @@ class YARD::CLI::Graph < ::YARD::CLI::YardoptsCommand
 end
 
 # Options to pass to the {Graph} CLI.
+#
+# source://yard//lib/yard/cli/graph.rb#6
 class YARD::CLI::GraphOptions < ::YARD::Templates::TemplateOptions
   # @return [String] any contents to pass to the digraph
   #
@@ -4799,6 +1560,8 @@ end
 # Handles help for commands
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/help.rb#6
 class YARD::CLI::Help < ::YARD::CLI::Command
   # @since 0.6.0
   #
@@ -4818,6 +1581,8 @@ end
 #
 # @since 0.8.0
 # @todo Support msgminit and msgmerge features?
+#
+# source://yard//lib/yard/cli/i18n.rb#13
 class YARD::CLI::I18n < ::YARD::CLI::Yardoc
   # @return [I18n] a new instance of I18n
   # @since 0.8.0
@@ -4849,6 +1614,8 @@ class YARD::CLI::I18n < ::YARD::CLI::Yardoc
 end
 
 # Lists all constant and method names in the codebase. Uses {Yardoc} --list.
+#
+# source://yard//lib/yard/cli/list.rb#5
 class YARD::CLI::List < ::YARD::CLI::Command
   # source://yard//lib/yard/cli/list.rb#6
   def description; end
@@ -4866,6 +1633,8 @@ end
 # Lists all markup types
 #
 # @since 0.8.6
+#
+# source://yard//lib/yard/cli/markup_types.rb#6
 class YARD::CLI::MarkupTypes < ::YARD::CLI::Command
   # @since 0.8.6
   #
@@ -4886,6 +1655,8 @@ end
 # A local documentation server
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/server.rb#8
 class YARD::CLI::Server < ::YARD::CLI::Command
   # Creates a new instance of the Server command line utility
   #
@@ -5036,6 +1807,8 @@ class YARD::CLI::Server < ::YARD::CLI::Command
 end
 
 # @since 0.6.0
+#
+# source://yard//lib/yard/cli/stats.rb#5
 class YARD::CLI::Stats < ::YARD::CLI::Yardoc
   include ::YARD::Templates::Helpers::BaseHelper
 
@@ -5185,6 +1958,8 @@ end
 YARD::CLI::Stats::STATS_ORDER = T.let(T.unsafe(nil), Array)
 
 # A tool to view documentation in the console like `ri`
+#
+# source://yard//lib/yard/cli/yri.rb#9
 class YARD::CLI::YRI < ::YARD::CLI::Command
   # @return [YRI] a new instance of YRI
   #
@@ -6005,6 +2780,8 @@ YARD::CodeObjects::BUILTIN_MODULES = T.let(T.unsafe(nil), Array)
 # @see #[]=
 # @see NamespaceObject
 # @see NamespaceMapper.register_separator
+#
+# source://yard//lib/yard/code_objects/base.rb#133
 class YARD::CodeObjects::Base
   # Creates a new code object
   #
@@ -6486,6 +3263,8 @@ YARD::CodeObjects::CSEPQ = T.let(T.unsafe(nil), String)
 
 # A ClassObject represents a Ruby class in source code. It is a {ModuleObject}
 # with extra inheritance semantics through the superclass.
+#
+# source://yard//lib/yard/code_objects/class_object.rb#9
 class YARD::CodeObjects::ClassObject < ::YARD::CodeObjects::NamespaceObject
   # Creates a new class object in +namespace+ with +name+
   #
@@ -6565,6 +3344,8 @@ end
 
 # Represents a class variable inside a namespace. The path is expressed
 # in the form "A::B::@@classvariable"
+#
+# source://yard//lib/yard/code_objects/class_variable_object.rb#8
 class YARD::CodeObjects::ClassVariableObject < ::YARD::CodeObjects::Base
   # @return [String] the class variable's value
   #
@@ -6579,6 +3360,8 @@ end
 
 # A list of code objects. This array acts like a set (no unique items)
 # but also disallows any {Proxy} objects from being added.
+#
+# source://yard//lib/yard/code_objects/base.rb#10
 class YARD::CodeObjects::CodeObjectList < ::Array
   # Creates a new object list associated with a namespace
   #
@@ -6607,6 +3390,8 @@ end
 
 # A +ConstantObject+ represents a Ruby constant (not a module or class).
 # To access the constant's (source code) value, use {#value}.
+#
+# source://yard//lib/yard/code_objects/constant_object.rb#9
 class YARD::CodeObjects::ConstantObject < ::YARD::CodeObjects::Base
   # The source code representing the constant's value
   #
@@ -6623,6 +3408,8 @@ end
 # scope of another namespace.
 #
 # @see MethodObject
+#
+# source://yard//lib/yard/code_objects/extended_method_object.rb#7
 class YARD::CodeObjects::ExtendedMethodObject
   # Sets up a delegate for {MethodObject} obj.
   #
@@ -6651,6 +3438,8 @@ end
 # file). It is not strictly a CodeObject (does not inherit from `Base`) although
 # it implements `path`, `name` and `type`, and therefore should be structurally
 # compatible with most CodeObject interfaces.
+#
+# source://yard//lib/yard/code_objects/extra_file_object.rb#7
 class YARD::CodeObjects::ExtraFileObject
   # Creates a new extra file object.
   #
@@ -6800,6 +3589,8 @@ YARD::CodeObjects::METHODNAMEMATCH = T.let(T.unsafe(nil), Regexp)
 #
 #   # Extra data added to docstring
 #   property :bar
+#
+# source://yard//lib/yard/code_objects/macro_object.rb#30
 class YARD::CodeObjects::MacroObject < ::YARD::CodeObjects::Base
   # @return [Boolean] whether this macro is attached to a method
   #
@@ -6966,6 +3757,8 @@ end
 YARD::CodeObjects::MacroObject::MACRO_MATCH = T.let(T.unsafe(nil), Regexp)
 
 # Represents a Ruby method in source
+#
+# source://yard//lib/yard/code_objects/method_object.rb#10
 class YARD::CodeObjects::MethodObject < ::YARD::CodeObjects::Base
   # Creates a new method object in +namespace+ with +name+ and an instance
   # or class +scope+
@@ -7137,6 +3930,8 @@ class YARD::CodeObjects::MethodObject < ::YARD::CodeObjects::Base
 end
 
 # Represents a Ruby module.
+#
+# source://yard//lib/yard/code_objects/module_object.rb#11
 class YARD::CodeObjects::ModuleObject < ::YARD::CodeObjects::NamespaceObject
   # Returns the inheritance tree of mixins.
   #
@@ -7167,6 +3962,8 @@ YARD::CodeObjects::NSEPQ = T.let(T.unsafe(nil), String)
 # for {Registry} lookup.
 #
 # @since 0.9.1
+#
+# source://yard//lib/yard/code_objects/namespace_mapper.rb#8
 module YARD::CodeObjects::NamespaceMapper
   # Clears the map of separators.
   #
@@ -7298,6 +4095,8 @@ end
 # A "namespace" is any object that can store other objects within itself.
 # The two main Ruby objects that can act as namespaces are modules
 # ({ModuleObject}) and classes ({ClassObject}).
+#
+# source://yard//lib/yard/code_objects/namespace_object.rb#11
 class YARD::CodeObjects::NamespaceObject < ::YARD::CodeObjects::Base
   # Creates a new namespace object inside +namespace+ with +name+.
   #
@@ -7477,6 +4276,8 @@ YARD::CodeObjects::PROXY_MATCH = T.let(T.unsafe(nil), Regexp)
 #   Proxy.new(mymoduleobj, "String")
 # @see Registry.resolve
 # @see ProxyMethodError
+#
+# source://yard//lib/yard/code_objects/proxy.rb#24
 class YARD::CodeObjects::Proxy
   # Creates a new Proxy
   #
@@ -7661,10 +4462,14 @@ class YARD::CodeObjects::Proxy
 end
 
 # A special type of +NoMethodError+ when raised from a {Proxy}
+#
+# source://yard//lib/yard/code_objects/proxy.rb#5
 class YARD::CodeObjects::ProxyMethodError < ::NoMethodError; end
 
 # Represents the root namespace object (the invisible Ruby module that
 # holds all top level modules, class and other objects).
+#
+# source://yard//lib/yard/code_objects/root_object.rb#6
 class YARD::CodeObjects::RootObject < ::YARD::CodeObjects::ModuleObject
   # @return [Boolean]
   #
@@ -7964,6 +4769,8 @@ YARD::Config::YARD_PLUGIN_PREFIX = T.let(T.unsafe(nil), Regexp)
 #
 # Tags can be nested in a documentation string, though the {Tags::Tag}
 # itself is responsible for parsing the inner tags.
+#
+# source://yard//lib/yard/docstring.rb#16
 class YARD::Docstring < ::String
   # Creates a new docstring with the raw contents attached to an optional
   # object. Parsing will be done by the {DocstringParser} class.
@@ -8280,6 +5087,8 @@ YARD::Docstring::META_MATCH = T.let(T.unsafe(nil), Regexp)
 #   YARD::Docstring.default_parser = ReverseDocstringParser
 # @see #parse_content
 # @since 0.8.0
+#
+# source://yard//lib/yard/docstring_parser.rb#30
 class YARD::DocstringParser
   # Creates a new parser to parse docstring data
   #
@@ -8564,6 +5373,7 @@ end
 # source://yard//lib/yard/docstring_parser.rb#73
 YARD::DocstringParser::META_MATCH = T.let(T.unsafe(nil), Regexp)
 
+# source://yard//lib/yard/gem_index.rb#6
 module YARD::GemIndex
   private
 
@@ -9102,6 +5912,8 @@ end
 module YARD::Handlers::C; end
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/alias_handler.rb#2
 class YARD::Handlers::C::AliasHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9110,6 +5922,8 @@ class YARD::Handlers::C::AliasHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::AliasHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/attribute_handler.rb#2
 class YARD::Handlers::C::AttributeHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9118,6 +5932,8 @@ class YARD::Handlers::C::AttributeHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::AttributeHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/base.rb#5
 class YARD::Handlers::C::Base < ::YARD::Handlers::Base
   include ::YARD::Parser::C
   include ::YARD::Handlers::Common::MethodHandler
@@ -9212,6 +6028,8 @@ end
 YARD::Handlers::C::Base::ERROR_CLASS_NAMES = T.let(T.unsafe(nil), Hash)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/class_handler.rb#2
 class YARD::Handlers::C::ClassHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9225,6 +6043,8 @@ YARD::Handlers::C::ClassHandler::MATCH1 = T.let(T.unsafe(nil), Regexp)
 YARD::Handlers::C::ClassHandler::MATCH2 = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/constant_handler.rb#2
 class YARD::Handlers::C::ConstantHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9233,6 +6053,8 @@ class YARD::Handlers::C::ConstantHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::ConstantHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/handler_methods.rb#5
 module YARD::Handlers::C::HandlerMethods
   include ::YARD::Parser::C
   include ::YARD::CodeObjects
@@ -9289,6 +6111,8 @@ end
 # Handles the Init_Libname() method
 #
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/init_handler.rb#3
 class YARD::Handlers::C::InitHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9297,6 +6121,8 @@ class YARD::Handlers::C::InitHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::InitHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/method_handler.rb#2
 class YARD::Handlers::C::MethodHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9315,6 +6141,8 @@ YARD::Handlers::C::MethodHandler::MATCH2 = T.let(T.unsafe(nil), Regexp)
 YARD::Handlers::C::MethodHandler::MATCH3 = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/mixin_handler.rb#2
 class YARD::Handlers::C::MixinHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9323,6 +6151,8 @@ class YARD::Handlers::C::MixinHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::MixinHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/module_handler.rb#2
 class YARD::Handlers::C::ModuleHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9338,6 +6168,8 @@ YARD::Handlers::C::ModuleHandler::MATCH2 = T.let(T.unsafe(nil), Regexp)
 # Parses comments
 #
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/override_comment_handler.rb#3
 class YARD::Handlers::C::OverrideCommentHandler < ::YARD::Handlers::C::Base
   # @since 0.8.0
   #
@@ -9351,6 +6183,8 @@ class YARD::Handlers::C::OverrideCommentHandler < ::YARD::Handlers::C::Base
 end
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/path_handler.rb#2
 class YARD::Handlers::C::PathHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9359,6 +6193,8 @@ class YARD::Handlers::C::PathHandler < ::YARD::Handlers::C::Base; end
 YARD::Handlers::C::PathHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/struct_handler.rb#2
 class YARD::Handlers::C::StructHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9369,6 +6205,8 @@ YARD::Handlers::C::StructHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 # Keeps track of function bodies for symbol lookup during Ruby method declarations
 #
 # @since 0.8.0
+#
+# source://yard//lib/yard/handlers/c/symbol_handler.rb#3
 class YARD::Handlers::C::SymbolHandler < ::YARD::Handlers::C::Base; end
 
 # @since 0.8.0
@@ -9382,6 +6220,8 @@ YARD::Handlers::C::SymbolHandler::MATCH = T.let(T.unsafe(nil), Regexp)
 module YARD::Handlers::Common; end
 
 # Shared functionality between Ruby and C method handlers.
+#
+# source://yard//lib/yard/handlers/common/method_handler.rb#6
 module YARD::Handlers::Common::MethodHandler
   # @param obj [MethodObject]
   #
@@ -9438,6 +6278,8 @@ end
 # across different files, look at {#globals}.
 #
 # @see Handlers::Base
+#
+# source://yard//lib/yard/handlers/processor.rb#20
 class YARD::Handlers::Processor
   # Creates a new Processor for a +file+.
   #
@@ -9660,9 +6502,13 @@ end
 module YARD::Handlers::Ruby; end
 
 # Handles alias and alias_method calls
+#
+# source://yard//lib/yard/handlers/ruby/alias_handler.rb#3
 class YARD::Handlers::Ruby::AliasHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Handles +attr_*+ statements in modules/classes
+#
+# source://yard//lib/yard/handlers/ruby/attribute_handler.rb#3
 class YARD::Handlers::Ruby::AttributeHandler < ::YARD::Handlers::Ruby::Base
   protected
 
@@ -9756,6 +6602,8 @@ end
 #   def xyz; end
 #   end
 #   end
+#
+# source://yard//lib/yard/handlers/ruby/class_condition_handler.rb#12
 class YARD::Handlers::Ruby::ClassConditionHandler < ::YARD::Handlers::Ruby::Base
   protected
 
@@ -9806,12 +6654,18 @@ class YARD::Handlers::Ruby::ClassHandler < ::YARD::Handlers::Ruby::Base
 end
 
 # Handles a class variable (@@variable)
+#
+# source://yard//lib/yard/handlers/ruby/class_variable_handler.rb#3
 class YARD::Handlers::Ruby::ClassVariableHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Handles any lone comment statement in a Ruby file
+#
+# source://yard//lib/yard/handlers/ruby/comment_handler.rb#3
 class YARD::Handlers::Ruby::CommentHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Handles any constant assignment
+#
+# source://yard//lib/yard/handlers/ruby/constant_handler.rb#3
 class YARD::Handlers::Ruby::ConstantHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::StructHandlerMethods
 
@@ -9834,10 +6688,13 @@ class YARD::Handlers::Ruby::ConstantHandler < ::YARD::Handlers::Ruby::Base
 end
 
 # Handles automatic detection of dsl-style methods
+#
+# source://yard//lib/yard/handlers/ruby/dsl_handler.rb#6
 class YARD::Handlers::Ruby::DSLHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::DSLHandlerMethods
 end
 
+# source://yard//lib/yard/handlers/ruby/dsl_handler_methods.rb#5
 module YARD::Handlers::Ruby::DSLHandlerMethods
   include ::YARD::CodeObjects
   include ::YARD::Parser
@@ -9875,6 +6732,8 @@ end
 YARD::Handlers::Ruby::DSLHandlerMethods::IGNORE_METHODS = T.let(T.unsafe(nil), Hash)
 
 # Helper methods to assist with processing decorators.
+#
+# source://yard//lib/yard/handlers/ruby/decorator_handler_methods.rb#3
 module YARD::Handlers::Ruby::DecoratorHandlerMethods
   # @overload process_decorator
   #
@@ -9890,11 +6749,15 @@ module YARD::Handlers::Ruby::DecoratorHandlerMethods
 end
 
 # Handles 'raise' calls inside methods
+#
+# source://yard//lib/yard/handlers/ruby/exception_handler.rb#3
 class YARD::Handlers::Ruby::ExceptionHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Handles 'extend' call to include modules into the class scope of another
 #
 # @see MixinHandler
+#
+# source://yard//lib/yard/handlers/ruby/extend_handler.rb#4
 class YARD::Handlers::Ruby::ExtendHandler < ::YARD::Handlers::Ruby::MixinHandler
   # source://yard//lib/yard/handlers/ruby/extend_handler.rb#8
   def scope; end
@@ -9953,15 +6816,21 @@ end
 module YARD::Handlers::Ruby::Legacy; end
 
 # Handles alias and alias_method calls
+#
+# source://yard//lib/yard/handlers/ruby/legacy/alias_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::AliasHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles +attr_*+ statements in modules/classes
+#
+# source://yard//lib/yard/handlers/ruby/legacy/attribute_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::AttributeHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # This is the base handler for the legacy parser. To implement a legacy
 # handler, subclass this class.
 #
 # @abstract See {Handlers::Base} for subclassing information.
+#
+# source://yard//lib/yard/handlers/ruby/legacy/base.rb#10
 class YARD::Handlers::Ruby::Legacy::Base < ::YARD::Handlers::Base
   include ::YARD::Parser::Ruby::Legacy::RubyToken
 
@@ -10072,6 +6941,8 @@ end
 #   end
 #   end
 # @since 0.5.4
+#
+# source://yard//lib/yard/handlers/ruby/legacy/class_condition_handler.rb#4
 class YARD::Handlers::Ruby::Legacy::ClassConditionHandler < ::YARD::Handlers::Ruby::Legacy::Base
   protected
 
@@ -10097,6 +6968,8 @@ class YARD::Handlers::Ruby::Legacy::ClassConditionHandler < ::YARD::Handlers::Ru
 end
 
 # Handles class declarations
+#
+# source://yard//lib/yard/handlers/ruby/legacy/class_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ClassHandler < ::YARD::Handlers::Ruby::Legacy::Base
   include ::YARD::Handlers::Ruby::StructHandlerMethods
 
@@ -10126,15 +6999,21 @@ class YARD::Handlers::Ruby::Legacy::ClassHandler < ::YARD::Handlers::Ruby::Legac
 end
 
 # Handles a class variable (@@variable)
+#
+# source://yard//lib/yard/handlers/ruby/legacy/class_variable_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ClassVariableHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # source://yard//lib/yard/handlers/ruby/legacy/class_variable_handler.rb#4
 YARD::Handlers::Ruby::Legacy::ClassVariableHandler::HANDLER_MATCH = T.let(T.unsafe(nil), Regexp)
 
 # Handles any lone comment statement in a Ruby file
+#
+# source://yard//lib/yard/handlers/ruby/legacy/comment_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::CommentHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles any constant assignment
+#
+# source://yard//lib/yard/handlers/ruby/legacy/constant_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ConstantHandler < ::YARD::Handlers::Ruby::Legacy::Base
   include ::YARD::Handlers::Ruby::StructHandlerMethods
 
@@ -10151,16 +7030,22 @@ end
 YARD::Handlers::Ruby::Legacy::ConstantHandler::HANDLER_MATCH = T.let(T.unsafe(nil), Regexp)
 
 # Handles automatic detection of dsl-style methods
+#
+# source://yard//lib/yard/handlers/ruby/legacy/dsl_handler.rb#7
 class YARD::Handlers::Ruby::Legacy::DSLHandler < ::YARD::Handlers::Ruby::Legacy::Base
   include ::YARD::Handlers::Ruby::DSLHandlerMethods
 end
 
 # Handles 'raise' calls inside methods
+#
+# source://yard//lib/yard/handlers/ruby/legacy/exception_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ExceptionHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles 'extend' call to include modules into the class scope of another
 #
 # @see MixinHandler
+#
+# source://yard//lib/yard/handlers/ruby/legacy/extend_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ExtendHandler < ::YARD::Handlers::Ruby::Legacy::MixinHandler
   # source://yard//lib/yard/handlers/ruby/legacy/extend_handler.rb#7
   def scope; end
@@ -10172,9 +7057,13 @@ class YARD::Handlers::Ruby::Legacy::ExtendHandler < ::YARD::Handlers::Ruby::Lega
 end
 
 # Handles a method definition
+#
+# source://yard//lib/yard/handlers/ruby/legacy/method_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::MethodHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles the 'include' statement to mixin a module in the instance scope
+#
+# source://yard//lib/yard/handlers/ruby/legacy/mixin_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::MixinHandler < ::YARD::Handlers::Ruby::Legacy::Base
   private
 
@@ -10186,12 +7075,18 @@ end
 
 # Handles module_function calls to turn methods into public class methods.
 # Also creates a private instance copy of the method.
+#
+# source://yard//lib/yard/handlers/ruby/legacy/module_function_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ModuleFunctionHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles the declaration of a module
+#
+# source://yard//lib/yard/handlers/ruby/legacy/module_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::ModuleHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Sets visibility of a class method to private.
+#
+# source://yard//lib/yard/handlers/ruby/legacy/private_class_method_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::PrivateClassMethodHandler < ::YARD::Handlers::Ruby::Legacy::Base
   private
 
@@ -10200,6 +7095,8 @@ class YARD::Handlers::Ruby::Legacy::PrivateClassMethodHandler < ::YARD::Handlers
 end
 
 # Sets visibility of a constant (class, module, const)
+#
+# source://yard//lib/yard/handlers/ruby/legacy/private_constant_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::PrivateConstantHandler < ::YARD::Handlers::Ruby::Legacy::Base
   private
 
@@ -10208,9 +7105,13 @@ class YARD::Handlers::Ruby::Legacy::PrivateConstantHandler < ::YARD::Handlers::R
 end
 
 # Handles 'private', 'protected', and 'public' calls.
+#
+# source://yard//lib/yard/handlers/ruby/legacy/visibility_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::VisibilityHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # Handles 'yield' calls
+#
+# source://yard//lib/yard/handlers/ruby/legacy/yield_handler.rb#3
 class YARD::Handlers::Ruby::Legacy::YieldHandler < ::YARD::Handlers::Ruby::Legacy::Base; end
 
 # source://yard//lib/yard/handlers/ruby/base.rb#37
@@ -10222,9 +7123,13 @@ class YARD::Handlers::Ruby::MethodCallWrapper < ::YARD::Handlers::Ruby::HandlesE
 end
 
 # Handles a conditional inside a method
+#
+# source://yard//lib/yard/handlers/ruby/method_condition_handler.rb#3
 class YARD::Handlers::Ruby::MethodConditionHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Handles a method definition
+#
+# source://yard//lib/yard/handlers/ruby/method_handler.rb#3
 class YARD::Handlers::Ruby::MethodHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Common::MethodHandler
 
@@ -10233,6 +7138,8 @@ class YARD::Handlers::Ruby::MethodHandler < ::YARD::Handlers::Ruby::Base
 end
 
 # Handles the 'include' statement to mixin a module in the instance scope
+#
+# source://yard//lib/yard/handlers/ruby/mixin_handler.rb#3
 class YARD::Handlers::Ruby::MixinHandler < ::YARD::Handlers::Ruby::Base
   protected
 
@@ -10247,6 +7154,8 @@ end
 
 # Handles module_function calls to turn methods into public class methods.
 # Also creates a private instance copy of the method.
+#
+# source://yard//lib/yard/handlers/ruby/module_function_handler.rb#4
 class YARD::Handlers::Ruby::ModuleFunctionHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
 
@@ -10255,14 +7164,20 @@ class YARD::Handlers::Ruby::ModuleFunctionHandler < ::YARD::Handlers::Ruby::Base
 end
 
 # Handles the declaration of a module
+#
+# source://yard//lib/yard/handlers/ruby/module_handler.rb#3
 class YARD::Handlers::Ruby::ModuleHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Sets visibility of a class method to private.
+#
+# source://yard//lib/yard/handlers/ruby/private_class_method_handler.rb#3
 class YARD::Handlers::Ruby::PrivateClassMethodHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
 end
 
 # Sets visibility of a constant (class, module, const)
+#
+# source://yard//lib/yard/handlers/ruby/private_constant_handler.rb#6
 class YARD::Handlers::Ruby::PrivateConstantHandler < ::YARD::Handlers::Ruby::Base
   private
 
@@ -10271,6 +7186,8 @@ class YARD::Handlers::Ruby::PrivateConstantHandler < ::YARD::Handlers::Ruby::Bas
 end
 
 # Sets visibility of a class method to public.
+#
+# source://yard//lib/yard/handlers/ruby/public_class_method_handler.rb#3
 class YARD::Handlers::Ruby::PublicClassMethodHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
 end
@@ -10403,11 +7320,15 @@ class YARD::Handlers::Ruby::TestNodeWrapper < ::YARD::Handlers::Ruby::HandlesExt
 end
 
 # Handles 'private', 'protected', and 'public' calls.
+#
+# source://yard//lib/yard/handlers/ruby/visibility_handler.rb#3
 class YARD::Handlers::Ruby::VisibilityHandler < ::YARD::Handlers::Ruby::Base
   include ::YARD::Handlers::Ruby::DecoratorHandlerMethods
 end
 
 # Handles 'yield' calls
+#
+# source://yard//lib/yard/handlers/ruby/yield_handler.rb#3
 class YARD::Handlers::Ruby::YieldHandler < ::YARD::Handlers::Ruby::Base; end
 
 # Namespace for internationalization (i18n)
@@ -10421,6 +7342,8 @@ module YARD::I18n; end
 # messages.
 #
 # @since 0.8.2
+#
+# source://yard//lib/yard/i18n/locale.rb#8
 class YARD::I18n::Locale
   # Creates a locale for +name+ locale.
   #
@@ -10476,6 +7399,8 @@ end
 # {#id} and some properties {#locations} and {#comments}.
 #
 # @since 0.8.1
+#
+# source://yard//lib/yard/i18n/message.rb#10
 class YARD::I18n::Message
   # Creates a trasnlate target message for message ID +id+.
   #
@@ -10536,6 +7461,8 @@ end
 # Acts as a container for {Message} objects.
 #
 # @since 0.8.1
+#
+# source://yard//lib/yard/i18n/messages.rb#7
 class YARD::I18n::Messages
   include ::Enumerable
 
@@ -10653,6 +7580,8 @@ end
 #   end
 # @see http://www.gnu.org/software/gettext/manual/html_node/PO-Files.html GNU gettext manual about details of PO file
 # @since 0.8.0
+#
+# source://yard//lib/yard/i18n/pot_generator.rb#65
 class YARD::I18n::PotGenerator
   # Creates a POT generator that uses +relative_base_path+ to
   # generate locations for a msgid. +relative_base_path+ is
@@ -10776,6 +7705,8 @@ end
 # Provides some convenient features for translating a text.
 #
 # @since 0.8.0
+#
+# source://yard//lib/yard/i18n/text.rb#5
 class YARD::I18n::Text
   # Creates a text object that has translation related features for
   # the input text.
@@ -10854,6 +7785,8 @@ end
 
 # Handles console logging for info, warnings and errors.
 # Uses the stdlib Logger class in Ruby for all the backend logic.
+#
+# source://yard//lib/yard/logging.rb#12
 class YARD::Logger < ::Logger
   # Creates a new logger
   #
@@ -11311,6 +8244,7 @@ end
 # source://yard//lib/yard/autoload.rb#162
 module YARD::Parser::C; end
 
+# source://yard//lib/yard/parser/c/statement.rb#41
 class YARD::Parser::C::BodyStatement < ::YARD::Parser::C::Statement
   # Returns the value of attribute comments.
   #
@@ -11400,6 +8334,7 @@ class YARD::Parser::C::CParser < ::YARD::Parser::Base
   def struct; end
 end
 
+# source://yard//lib/yard/parser/c/statement.rb#51
 class YARD::Parser::C::Comment < ::YARD::Parser::C::Statement
   include ::YARD::Parser::C::CommentParser
 
@@ -11448,6 +8383,7 @@ class YARD::Parser::C::Comment < ::YARD::Parser::C::Statement
   def type=(_arg0); end
 end
 
+# source://yard//lib/yard/parser/c/comment_parser.rb#5
 module YARD::Parser::C::CommentParser
   protected
 
@@ -11469,6 +8405,7 @@ module YARD::Parser::C::CommentParser
   def remove_private_comments(comment); end
 end
 
+# source://yard//lib/yard/parser/c/statement.rb#5
 class YARD::Parser::C::Statement
   # @return [Statement] a new instance of Statement
   #
@@ -11551,6 +8488,7 @@ class YARD::Parser::C::Statement
   def source=(_arg0); end
 end
 
+# source://yard//lib/yard/parser/c/statement.rb#45
 class YARD::Parser::C::ToplevelStatement < ::YARD::Parser::C::Statement
   # Returns the value of attribute block.
   #
@@ -12057,6 +8995,8 @@ module YARD::Parser::Ruby::Legacy; end
 # Lexical analyzer for Ruby source
 #
 # @private
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#314
 class YARD::Parser::Ruby::Legacy::RubyLex
   include ::YARD::Parser::Ruby::Legacy::RubyToken
   include ::IRB
@@ -12228,6 +9168,8 @@ YARD::Parser::Ruby::Legacy::RubyLex::ACCEPTS_COLON = T.let(T.unsafe(nil), Array)
 # original line, but then skip the here document body.
 #
 # @private
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#343
 class YARD::Parser::Ruby::Legacy::RubyLex::BufferedReader
   # @return [BufferedReader] a new instance of BufferedReader
   #
@@ -12323,6 +9265,8 @@ class YARD::Parser::Ruby::Legacy::RubyParser < ::YARD::Parser::Base
 end
 
 # Legacy lexical tokenizer module.
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#6
 module YARD::Parser::Ruby::Legacy::RubyToken
   # @private
   #
@@ -12366,189 +9310,281 @@ YARD::Parser::Ruby::Legacy::RubyToken::EXPR_MID = T.let(T.unsafe(nil), Symbol)
 # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#308
 YARD::Parser::Ruby::Legacy::RubyToken::NEWLINE_TOKEN = T.let(T.unsafe(nil), YARD::Parser::Ruby::Legacy::RubyToken::TkNL)
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::OPASGN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkALIAS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkAMPER < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkAND < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkANDOP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkAREF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkASET < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkASSIGN < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkASSOC < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkAT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkUnknownChar; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBACKQUOTE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBACKSLASH < ::YARD::Parser::Ruby::Legacy::RubyToken::TkUnknownChar; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBACK_REF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBEGIN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBITAND < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBITNOT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBITOR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBITXOR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBREAK < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
 # Represents a block
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#54
 class YARD::Parser::Ruby::Legacy::RubyToken::TkBlockContents < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#55
   def text; end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCASE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCLASS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCMP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCOLON < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCOLON2 < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCOLON3 < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCOMMA < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCOMMENT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkCONSTANT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDEF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDEFINED < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDIV < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDO < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDOLLAR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkUnknownChar; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDOT < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDOT2 < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDOT3 < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDREGEXP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkNode; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDSTRING < ::YARD::Parser::Ruby::Legacy::RubyToken::TkNode; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkDXSTRING < ::YARD::Parser::Ruby::Legacy::RubyToken::TkNode; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkELSE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkELSIF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkEND < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkEND_OF_SCRIPT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkWhitespace; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkENSURE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkEQ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkEQQ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#115
 class YARD::Parser::Ruby::Legacy::RubyToken::TkError < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkFALSE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkFID < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkFLOAT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkFOR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkGEQ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkGT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkGVAR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkIDENTIFIER < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkIF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkIF_MOD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkIN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkINTEGER < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkIVAR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
 
 # Represents a Ruby identifier
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#72
 class YARD::Parser::Ruby::Legacy::RubyToken::TkId < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # @return [TkId] a new instance of TkId
   #
@@ -12562,84 +9598,111 @@ class YARD::Parser::Ruby::Legacy::RubyToken::TkId < ::YARD::Parser::Ruby::Legacy
 end
 
 # Represents a Ruby keyword
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#81
 class YARD::Parser::Ruby::Legacy::RubyToken::TkKW < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLABEL < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLBRACE < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLBRACK < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLEQ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLPAREN < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLSHFT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkLT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkMATCH < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkMINUS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkMOD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkMODULE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkMULT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNEQ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNEXT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNIL < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNL < ::YARD::Parser::Ruby::Legacy::RubyToken::TkWhitespace; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNMATCH < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNOT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNOTOP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNTH_REF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#63
 class YARD::Parser::Ruby::Legacy::RubyToken::TkNode < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # Returns the value of attribute node.
   #
@@ -12647,6 +9710,7 @@ class YARD::Parser::Ruby::Legacy::RubyToken::TkNode < ::YARD::Parser::Ruby::Lega
   def node; end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#98
 class YARD::Parser::Ruby::Legacy::RubyToken::TkOPASGN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   # @return [TkOPASGN] a new instance of TkOPASGN
   #
@@ -12659,46 +9723,68 @@ class YARD::Parser::Ruby::Legacy::RubyToken::TkOPASGN < ::YARD::Parser::Ruby::Le
   def op; end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkOR < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkOROP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#92
 class YARD::Parser::Ruby::Legacy::RubyToken::TkOp < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#93
   def name; end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkPLUS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkPOW < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkQUESTION < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRBRACE < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRBRACK < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkREDO < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkREGEXP < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRESCUE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRETRY < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRETURN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRPAREN < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkRSHFT < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
@@ -12711,16 +9797,33 @@ end
 # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#271
 YARD::Parser::Ruby::Legacy::RubyToken::TkReading2Token = T.let(T.unsafe(nil), Hash)
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSELF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSEMICOLON < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSPACE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkWhitespace; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSTAR < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSTRING < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSUPER < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSYMBEG < ::YARD::Parser::Ruby::Legacy::RubyToken::TkId; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkSYMBOL < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
 
 # Represents an end statement
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#59
 class YARD::Parser::Ruby::Legacy::RubyToken::TkStatementEnd < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#60
   def text; end
@@ -12729,27 +9832,42 @@ end
 # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#272
 YARD::Parser::Ruby::Legacy::RubyToken::TkSymbol2Token = T.let(T.unsafe(nil), Hash)
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkTHEN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkTRUE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUMINUS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUNDEF < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUNLESS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUNLESS_MOD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUNTIL < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUNTIL_MOD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUPLUS < ::YARD::Parser::Ruby::Legacy::RubyToken::TkOp
   class << self
     def op_name; end
   end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#107
 class YARD::Parser::Ruby::Legacy::RubyToken::TkUnknownChar < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # @return [TkUnknownChar] a new instance of TkUnknownChar
   #
@@ -12763,6 +9881,8 @@ class YARD::Parser::Ruby::Legacy::RubyToken::TkUnknownChar < ::YARD::Parser::Rub
 end
 
 # Represents a Ruby value
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#85
 class YARD::Parser::Ruby::Legacy::RubyToken::TkVal < ::YARD::Parser::Ruby::Legacy::RubyToken::Token
   # @return [TkVal] a new instance of TkVal
   #
@@ -12770,21 +9890,41 @@ class YARD::Parser::Ruby::Legacy::RubyToken::TkVal < ::YARD::Parser::Ruby::Legac
   def initialize(line_no, char_no, value = T.unsafe(nil)); end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkWHEN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkWHILE < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkWHILE_MOD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
 # Represents whitespace
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#68
 class YARD::Parser::Ruby::Legacy::RubyToken::TkWhitespace < ::YARD::Parser::Ruby::Legacy::RubyToken::Token; end
 
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkXSTRING < ::YARD::Parser::Ruby::Legacy::RubyToken::TkVal; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TkYIELD < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::Tk__FILE__ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::Tk__LINE__ < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TklBEGIN < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
+
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#281
 class YARD::Parser::Ruby::Legacy::RubyToken::TklEND < ::YARD::Parser::Ruby::Legacy::RubyToken::TkKW; end
 
 # Represents a token in the Ruby lexer
+#
+# source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#16
 class YARD::Parser::Ruby::Legacy::RubyToken::Token
   # Creates a new Token object
   #
@@ -12841,6 +9981,7 @@ YARD::Parser::Ruby::Legacy::RubyToken::Token::NO_TEXT = T.let(T.unsafe(nil), Str
 # source://yard//lib/yard/parser/ruby/legacy/ruby_lex.rb#147
 YARD::Parser::Ruby::Legacy::RubyToken::TokenDefinitions = T.let(T.unsafe(nil), Array)
 
+# source://yard//lib/yard/parser/ruby/legacy/statement.rb#4
 class YARD::Parser::Ruby::Legacy::Statement
   # @return [Statement] a new instance of Statement
   #
@@ -12933,6 +10074,7 @@ class YARD::Parser::Ruby::Legacy::Statement
   def clean_tokens(tokens); end
 end
 
+# source://yard//lib/yard/parser/ruby/legacy/statement_list.rb#4
 class YARD::Parser::Ruby::Legacy::StatementList < ::Array
   include ::YARD::Parser::Ruby::Legacy::RubyToken
 
@@ -13064,6 +10206,7 @@ end
 # source://yard//lib/yard/parser/ruby/legacy/statement_list.rb#11
 YARD::Parser::Ruby::Legacy::StatementList::OPEN_BLOCK_TOKENS = T.let(T.unsafe(nil), Array)
 
+# source://yard//lib/yard/parser/ruby/legacy/token_list.rb#4
 class YARD::Parser::Ruby::Legacy::TokenList < ::Array
   include ::YARD::Parser::Ruby::Legacy::RubyToken
 
@@ -14044,6 +11187,8 @@ end
 # Supports {#each} enumeration over a source's tokens, yielding
 # the token and a possible {CodeObjects::Base} associated with the
 # constant or identifier token.
+#
+# source://yard//lib/yard/parser/ruby/token_resolver.rb#8
 class YARD::Parser::Ruby::TokenResolver
   include ::Enumerable
   include ::YARD::CodeObjects::NamespaceMapper
@@ -14536,6 +11681,8 @@ YARD::ROOT = T.let(T.unsafe(nil), String)
 module YARD::Rake; end
 
 # The rake task to run {CLI::Yardoc} and generate documentation.
+#
+# source://yard//lib/yard/rake/yardoc_task.rb#10
 class YARD::Rake::YardocTask < ::Rake::TaskLib
   # Creates a new task with name +name+.
   #
@@ -14694,6 +11841,8 @@ end
 #   Registry.at('YARD::CodeObjects::Base#docstring')
 # @example Performing a lookup on a method anywhere in the inheritance tree
 #   Registry.resolve(P('YARD::CodeObjects::Base'), '#docstring', true)
+#
+# source://yard//lib/yard/registry.rb#32
 module YARD::Registry
   extend ::Enumerable
 
@@ -15047,6 +12196,8 @@ YARD::Registry::LOCAL_YARDOC_INDEX = T.let(T.unsafe(nil), String)
 #
 # @see Registry.resolve
 # @since 0.9.1
+#
+# source://yard//lib/yard/registry_resolver.rb#9
 class YARD::RegistryResolver
   include ::YARD::CodeObjects::NamespaceMapper
 
@@ -15141,6 +12292,8 @@ end
 #
 # @see Registry
 # @see Serializers::YardocSerializer
+#
+# source://yard//lib/yard/registry_store.rb#9
 class YARD::RegistryStore
   # @return [RegistryStore] a new instance of RegistryStore
   #
@@ -15392,6 +12545,8 @@ module YARD::Serializers; end
 # * {#after_serialize}
 #
 # @abstract Override this class to implement a custom serializer.
+#
+# source://yard//lib/yard/serializers/base.rb#17
 class YARD::Serializers::Base
   # Creates a new serializer with options
   #
@@ -15464,6 +12619,8 @@ class YARD::Serializers::Base
 end
 
 # Implements a serializer that reads from and writes to the filesystem.
+#
+# source://yard//lib/yard/serializers/file_system_serializer.rb#7
 class YARD::Serializers::FileSystemSerializer < ::YARD::Serializers::Base
   # Creates a new FileSystemSerializer with options
   #
@@ -15550,6 +12707,8 @@ end
 # @example Serializing to a pager (less)
 #   serializer = ProcessSerializer.new('less')
 #   serializer.serialize(object, "data!")
+#
+# source://yard//lib/yard/serializers/process_serializer.rb#12
 class YARD::Serializers::ProcessSerializer < ::YARD::Serializers::Base
   # Creates a new ProcessSerializer for the shell command +cmd+
   #
@@ -15567,6 +12726,8 @@ class YARD::Serializers::ProcessSerializer < ::YARD::Serializers::Base
 end
 
 # A serializer that writes data to standard output.
+#
+# source://yard//lib/yard/serializers/stdout_serializer.rb#9
 class YARD::Serializers::StdoutSerializer < ::YARD::Serializers::Base
   # Creates a serializer to print text to stdout
   #
@@ -15594,6 +12755,7 @@ class YARD::Serializers::StdoutSerializer < ::YARD::Serializers::Base
   def word_wrap(text, _length = T.unsafe(nil)); end
 end
 
+# source://yard//lib/yard/serializers/yardoc_serializer.rb#32
 class YARD::Serializers::YardocSerializer < ::YARD::Serializers::FileSystemSerializer
   # @return [YardocSerializer] a new instance of YardocSerializer
   #
@@ -15693,6 +12855,8 @@ end
 #
 # @abstract
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/adapter.rb#23
 class YARD::Server::Adapter
   # Creates a new adapter object
   #
@@ -15856,6 +13020,8 @@ module YARD::Server::Commands; end
 # @abstract
 # @see #run
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/base.rb#34
 class YARD::Server::Commands::Base
   # Creates a new command object, setting attributes named by keys
   # in the options hash. After initialization, the options hash
@@ -16064,6 +13230,8 @@ end
 #
 # @since 0.6.0
 # @todo Implement better support for detecting binary (image) filetypes
+#
+# source://yard//lib/yard/server/commands/display_file_command.rb#8
 class YARD::Server::Commands::DisplayFileCommand < ::YARD::Server::Commands::LibraryCommand
   # @since 0.6.0
   #
@@ -16085,6 +13253,8 @@ end
 # Displays documentation for a specific object identified by the path
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/display_object_command.rb#6
 class YARD::Server::Commands::DisplayObjectCommand < ::YARD::Server::Commands::LibraryCommand
   include ::YARD::Server::DocServerHelper
 
@@ -16114,6 +13284,8 @@ end
 # Displays an object wrapped in frames
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/frames_command.rb#6
 class YARD::Server::Commands::FramesCommand < ::YARD::Server::Commands::DisplayObjectCommand
   # @since 0.6.0
   #
@@ -16128,6 +13300,8 @@ end
 #
 # @abstract
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/library_command.rb#32
 class YARD::Server::Commands::LibraryCommand < ::YARD::Server::Commands::Base
   # @return [LibraryCommand] a new instance of LibraryCommand
   # @since 0.6.0
@@ -16279,6 +13453,8 @@ YARD::Server::Commands::LibraryCommand::CAN_FORK = T.let(T.unsafe(nil), TrueClas
 # Returns the index of libraries served by the server.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/library_index_command.rb#13
 class YARD::Server::Commands::LibraryIndexCommand < ::YARD::Server::Commands::Base
   # @since 0.6.0
   #
@@ -16297,6 +13473,8 @@ class YARD::Server::Commands::LibraryIndexCommand < ::YARD::Server::Commands::Ba
 end
 
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/library_index_command.rb#5
 class YARD::Server::Commands::LibraryIndexOptions < ::YARD::CLI::YardocOptions
   # @since 0.6.0
   #
@@ -16338,6 +13516,8 @@ class YARD::Server::Commands::LibraryIndexOptions < ::YARD::CLI::YardocOptions
 end
 
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/library_command.rb#7
 class YARD::Server::Commands::LibraryOptions < ::YARD::CLI::YardocOptions
   # @since 0.6.0
   #
@@ -16394,6 +13574,8 @@ end
 # Returns a list of objects of a specific type
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/list_command.rb#6
 class YARD::Server::Commands::ListCommand < ::YARD::Server::Commands::LibraryCommand
   include ::YARD::Templates::Helpers::BaseHelper
 
@@ -16406,6 +13588,8 @@ end
 # Serves requests from the root of the server
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/root_request_command.rb#6
 class YARD::Server::Commands::RootRequestCommand < ::YARD::Server::Commands::Base
   include ::WEBrick::HTTPUtils
   include ::YARD::Server::Commands::StaticFileHelpers
@@ -16420,6 +13604,8 @@ end
 # the results as HTML or plaintext
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/search_command.rb#7
 class YARD::Server::Commands::SearchCommand < ::YARD::Server::Commands::LibraryCommand
   include ::YARD::Templates::Helpers::BaseHelper
   include ::YARD::Templates::Helpers::ModuleHelper
@@ -16481,6 +13667,8 @@ end
 # Serves static content when no other router matches a request
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/static_file_command.rb#6
 class YARD::Server::Commands::StaticFileCommand < ::YARD::Server::Commands::LibraryCommand
   include ::WEBrick::HTTPUtils
   include ::YARD::Server::Commands::StaticFileHelpers
@@ -16505,6 +13693,8 @@ YARD::Server::Commands::StaticFileCommand::STATIC_PATHS = T.let(T.unsafe(nil), A
 # and {favicon?} helpers.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/commands/static_file_helpers.rb#9
 module YARD::Server::Commands::StaticFileHelpers
   include ::WEBrick::HTTPUtils
 
@@ -16546,6 +13736,8 @@ end
 # certain template methods.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/doc_server_helper.rb#6
 module YARD::Server::DocServerHelper
   # @param path_components [Array<String>] components of a URL
   # @return [String] the absolute path from any mounted base URI.
@@ -16645,6 +13837,8 @@ end
 # static relative paths to files on disk.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/doc_server_serializer.rb#6
 class YARD::Server::DocServerSerializer < ::YARD::Serializers::FileSystemSerializer
   # @return [DocServerSerializer] a new instance of DocServerSerializer
   # @since 0.6.0
@@ -16669,12 +13863,16 @@ end
 # by {Commands::Base#call} to immediately end a request and return a response.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/adapter.rb#6
 class YARD::Server::FinishRequest < ::RuntimeError; end
 
 # This exception is raised when {LibraryVersion#prepare!} fails, or discovers
 # that the library is not "prepared" to be served by
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/library_version.rb#9
 class YARD::Server::LibraryNotPreparedError < ::RuntimeError; end
 
 # A library version encapsulates a library's documentation at a specific version.
@@ -16760,6 +13958,8 @@ class YARD::Server::LibraryNotPreparedError < ::RuntimeError; end
 #   # Creating a library of this source type:
 #   LibraryVersion.new('name', '1.0', nil, :http)
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/library_version.rb#94
 class YARD::Server::LibraryVersion
   # @param name [String] the name of the library
   # @param version [String] the specific (usually, but not always, numeric) library
@@ -16979,11 +14179,15 @@ end
 # code. If a message is provided, the body is set to the exception message.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/adapter.rb#11
 class YARD::Server::NotFoundError < ::RuntimeError; end
 
 # A server adapter to respond to requests using the Rack server infrastructure.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/rack_adapter.rb#44
 class YARD::Server::RackAdapter < ::YARD::Server::Adapter
   include ::WEBrick::HTTPUtils
 
@@ -17022,6 +14226,8 @@ end
 #   read about how to return a list of libraries, see {LibraryVersion} or look
 #   at the example below.
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/rack_adapter.rb#17
 class YARD::Server::RackMiddleware
   # Creates a new Rack-based middleware for serving YARD documentation.
   #
@@ -17071,6 +14277,8 @@ end
 #   # Using it:
 #   WebrickAdapter.new(libraries, :router => MyRouter).start
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/router.rb#32
 class YARD::Server::Router
   include ::YARD::Server::StaticCaching
   include ::YARD::Server::Commands
@@ -17225,6 +14433,8 @@ end
 #
 # @see Router Router documentation for "Caching"
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/static_caching.rb#7
 module YARD::Server::StaticCaching
   # Called by a router to return the cached object. By default, this
   # method performs disk-based caching. To perform other forms of caching,
@@ -17261,6 +14471,8 @@ end
 # The main adapter to initialize a WEBrick server.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/webrick_adapter.rb#9
 class YARD::Server::WebrickAdapter < ::YARD::Server::Adapter
   # Initializes a WEBrick server. If {Adapter#server_options} contains a
   # +:daemonize+ key set to true, the server will be daemonized.
@@ -17274,6 +14486,8 @@ end
 # The main WEBrick servlet implementation, accepting only GET requests.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/server/webrick_adapter.rb#20
 class YARD::Server::WebrickServlet < ::WEBrick::HTTPServlet::AbstractServlet
   # @return [WebrickServlet] a new instance of WebrickServlet
   # @since 0.6.0
@@ -17301,6 +14515,8 @@ end
 # Stubs marshal dumps and acts a delegate class for an object by path
 #
 # @private
+#
+# source://yard//lib/yard/serializers/yardoc_serializer.rb#6
 class YARD::StubProxy
   # @return [StubProxy] a new instance of StubProxy
   #
@@ -17360,6 +14576,8 @@ module YARD::Tags; end
 #   docstring text.
 # @see tag:!method
 # @since 0.7.0
+#
+# source://yard//lib/yard/tags/directives.rb#461
 class YARD::Tags::AttributeDirective < ::YARD::Tags::MethodDirective
   # @since 0.7.0
   #
@@ -17398,6 +14616,7 @@ class YARD::Tags::AttributeDirective < ::YARD::Tags::MethodDirective
   def writable?; end
 end
 
+# source://yard//lib/yard/tags/default_factory.rb#4
 class YARD::Tags::DefaultFactory
   # Parses tag text and creates a new tag with descriptive text
   #
@@ -17496,6 +14715,7 @@ YARD::Tags::DefaultFactory::TYPELIST_CLOSING_CHARS = T.let(T.unsafe(nil), String
 # source://yard//lib/yard/tags/default_factory.rb#5
 YARD::Tags::DefaultFactory::TYPELIST_OPENING_CHARS = T.let(T.unsafe(nil), String)
 
+# source://yard//lib/yard/tags/default_tag.rb#4
 class YARD::Tags::DefaultTag < ::YARD::Tags::Tag
   # @return [DefaultTag] a new instance of DefaultTag
   #
@@ -17525,6 +14745,8 @@ end
 # @abstract Subclasses should implement {#call}.
 # @see Library.define_directive
 # @since 0.8.0
+#
+# source://yard//lib/yard/tags/directives.rb#23
 class YARD::Tags::Directive
   # @param tag [Tag] the meta-data tag containing all input to the docstring
   # @param parser [DocstringParser] the docstring parser object
@@ -17648,6 +14870,8 @@ end
 #   end
 # @see tag:!group
 # @since 0.6.0
+#
+# source://yard//lib/yard/tags/directives.rb#105
 class YARD::Tags::EndGroupDirective < ::YARD::Tags::Directive
   # @since 0.6.0
   #
@@ -17671,6 +14895,8 @@ end
 #   will not apply to methods in that class or module.
 # @see tag:!endgroup
 # @since 0.6.0
+#
+# source://yard//lib/yard/tags/directives.rb#128
 class YARD::Tags::GroupDirective < ::YARD::Tags::Directive
   # @since 0.6.0
   #
@@ -17733,6 +14959,8 @@ end
 # @see define_tag
 # @see define_directive
 # @see Directive
+#
+# source://yard//lib/yard/tags/library.rb#59
 class YARD::Tags::Library
   # @return [Library] a new instance of Library
   #
@@ -18436,6 +15664,8 @@ end
 #   property :view_count, Integer
 #   end
 # @since 0.7.0
+#
+# source://yard//lib/yard/tags/directives.rb#258
 class YARD::Tags::MacroDirective < ::YARD::Tags::Directive
   # @raise [TagFormatError]
   # @since 0.7.0
@@ -18513,6 +15743,8 @@ end
 #   docstring text.
 # @see tag:!attribute
 # @since 0.7.0
+#
+# source://yard//lib/yard/tags/directives.rb#368
 class YARD::Tags::MethodDirective < ::YARD::Tags::Directive
   # @since 0.7.0
   #
@@ -18557,6 +15789,7 @@ end
 # source://yard//lib/yard/tags/directives.rb#369
 YARD::Tags::MethodDirective::SCOPE_MATCH = T.let(T.unsafe(nil), Regexp)
 
+# source://yard//lib/yard/tags/option_tag.rb#4
 class YARD::Tags::OptionTag < ::YARD::Tags::Tag
   # @return [OptionTag] a new instance of OptionTag
   #
@@ -18576,6 +15809,7 @@ class YARD::Tags::OptionTag < ::YARD::Tags::Tag
   def pair=(_arg0); end
 end
 
+# source://yard//lib/yard/tags/overload_tag.rb#4
 class YARD::Tags::OverloadTag < ::YARD::Tags::Tag
   # @return [OverloadTag] a new instance of OverloadTag
   #
@@ -18663,6 +15897,8 @@ end
 #   #     rb_define_method(rb_cFoo, "method", method, 0);
 #   #   }
 # @since 0.8.0
+#
+# source://yard//lib/yard/tags/directives.rb#545
 class YARD::Tags::ParseDirective < ::YARD::Tags::Directive
   # @since 0.8.0
   #
@@ -18670,6 +15906,7 @@ class YARD::Tags::ParseDirective < ::YARD::Tags::Directive
   def call; end
 end
 
+# source://yard//lib/yard/tags/ref_tag.rb#4
 module YARD::Tags::RefTag
   # Returns the value of attribute owner.
   #
@@ -18684,6 +15921,7 @@ module YARD::Tags::RefTag
   def owner=(_arg0); end
 end
 
+# source://yard//lib/yard/tags/ref_tag_list.rb#4
 class YARD::Tags::RefTagList
   # @return [RefTagList] a new instance of RefTagList
   #
@@ -18747,6 +15985,8 @@ end
 #   # Documentation for method2
 #   def method2; end
 # @since 0.7.0
+#
+# source://yard//lib/yard/tags/directives.rb#579
 class YARD::Tags::ScopeDirective < ::YARD::Tags::Directive
   # @since 0.7.0
   #
@@ -18763,6 +16003,8 @@ end
 #   #
 #   # is equivalent to:
 #   Tag.new(:param, 'an argument', ['String', 'nil'], 'arg')
+#
+# source://yard//lib/yard/tags/tag.rb#13
 class YARD::Tags::Tag
   # Creates a new tag object with a tag name and text. Optionally, formally declared types
   # and a key name can be specified.
@@ -18855,8 +16097,10 @@ class YARD::Tags::Tag
   def types=(_arg0); end
 end
 
+# source://yard//lib/yard/tags/tag_format_error.rb#4
 class YARD::Tags::TagFormatError < ::RuntimeError; end
 
+# source://yard//lib/yard/tags/types_explainer.rb#6
 class YARD::Tags::TypesExplainer
   class << self
     # Provides a plain English summary of the type specification, or nil
@@ -18883,6 +16127,8 @@ class YARD::Tags::TypesExplainer
 end
 
 # @private
+#
+# source://yard//lib/yard/tags/types_explainer.rb#58
 class YARD::Tags::TypesExplainer::CollectionType < ::YARD::Tags::TypesExplainer::Type
   # @return [CollectionType] a new instance of CollectionType
   #
@@ -18906,12 +16152,16 @@ class YARD::Tags::TypesExplainer::CollectionType < ::YARD::Tags::TypesExplainer:
 end
 
 # @private
+#
+# source://yard//lib/yard/tags/types_explainer.rb#72
 class YARD::Tags::TypesExplainer::FixedCollectionType < ::YARD::Tags::TypesExplainer::CollectionType
   # source://yard//lib/yard/tags/types_explainer.rb#73
   def to_s(_singular = T.unsafe(nil)); end
 end
 
 # @private
+#
+# source://yard//lib/yard/tags/types_explainer.rb#79
 class YARD::Tags::TypesExplainer::HashCollectionType < ::YARD::Tags::TypesExplainer::Type
   # @return [HashCollectionType] a new instance of HashCollectionType
   #
@@ -18947,6 +16197,8 @@ class YARD::Tags::TypesExplainer::HashCollectionType < ::YARD::Tags::TypesExplai
 end
 
 # @private
+#
+# source://yard//lib/yard/tags/types_explainer.rb#96
 class YARD::Tags::TypesExplainer::Parser
   include ::YARD::CodeObjects
 
@@ -18968,6 +16220,8 @@ end
 YARD::Tags::TypesExplainer::Parser::TOKENS = T.let(T.unsafe(nil), Hash)
 
 # @private
+#
+# source://yard//lib/yard/tags/types_explainer.rb#26
 class YARD::Tags::TypesExplainer::Type
   # @return [Type] a new instance of Type
   #
@@ -19013,6 +16267,8 @@ end
 #   # Documentation for method2
 #   def method2; end
 # @since 0.7.0
+#
+# source://yard//lib/yard/tags/directives.rb#611
 class YARD::Tags::VisibilityDirective < ::YARD::Tags::Directive
   # @since 0.7.0
   #
@@ -19031,6 +16287,8 @@ module YARD::Templates; end
 # * To create a template object at a path, use {template}.
 # * To render a template, call {render}.
 # * To register a template path in the lookup paths, call {register_template_path}.
+#
+# source://yard//lib/yard/templates/engine.rb#12
 module YARD::Templates::Engine
   class << self
     # Passes a set of objects to the +:fulldoc+ template for full documentation generation.
@@ -19155,6 +16413,8 @@ module YARD::Templates::Engine
 end
 
 # @since 0.5.4
+#
+# source://yard//lib/yard/templates/erb_cache.rb#5
 module YARD::Templates::ErbCache
   class << self
     # @since 0.5.4
@@ -19175,6 +16435,8 @@ end
 module YARD::Templates::Helpers; end
 
 # The base helper module included in all templates.
+#
+# source://yard//lib/yard/templates/helpers/base_helper.rb#4
 module YARD::Templates::Helpers::BaseHelper
   # @example
   #   s = format_object_title ModuleObject.new(:root, :MyModuleName)
@@ -19340,6 +16602,8 @@ module YARD::Templates::Helpers::BaseHelper
 end
 
 # Helpers for various object types
+#
+# source://yard//lib/yard/templates/helpers/filter_helper.rb#5
 module YARD::Templates::Helpers::FilterHelper
   # @return [Boolean] whether an object is a class
   #
@@ -19363,6 +16627,8 @@ module YARD::Templates::Helpers::FilterHelper
 end
 
 # The helper module for HTML templates.
+#
+# source://yard//lib/yard/templates/helpers/html_helper.rb#7
 module YARD::Templates::Helpers::HtmlHelper
   include ::YARD::Templates::Helpers::MarkupHelper
   include ::YARD::Templates::Helpers::ModuleHelper
@@ -19773,6 +17039,8 @@ YARD::Templates::Helpers::HtmlHelper::ASCIIDOC_ATTRIBUTES = T.let(T.unsafe(nil),
 YARD::Templates::Helpers::HtmlHelper::URLMATCH = T.let(T.unsafe(nil), Regexp)
 
 # Helper methods for syntax highlighting.
+#
+# source://yard//lib/yard/templates/helpers/html_syntax_highlight_helper.rb#6
 module YARD::Templates::Helpers::HtmlSyntaxHighlightHelper
   include ::YARD::Templates::Helpers::ModuleHelper
 
@@ -19801,6 +17069,7 @@ end
 # source://yard//lib/yard/autoload.rb#272
 module YARD::Templates::Helpers::Markup; end
 
+# source://yard//lib/yard/templates/helpers/markup/rdoc_markdown.rb#13
 class YARD::Templates::Helpers::Markup::RDocMarkdown < ::YARD::Templates::Helpers::Markup::RDocMarkup
   # @return [RDocMarkdown] a new instance of RDocMarkdown
   #
@@ -19811,6 +17080,7 @@ class YARD::Templates::Helpers::Markup::RDocMarkdown < ::YARD::Templates::Helper
   def fix_typewriter(html); end
 end
 
+# source://yard//lib/yard/templates/helpers/markup/rdoc_markup.rb#12
 class YARD::Templates::Helpers::Markup::RDocMarkup
   # @return [RDocMarkup] a new instance of RDocMarkup
   #
@@ -19853,6 +17123,7 @@ end
 # source://yard//lib/yard/templates/helpers/markup/rdoc_markup.rb#12
 YARD::Templates::Helpers::Markup::RDocMarkup::MARKUP = RDoc::Markup
 
+# source://yard//lib/yard/templates/helpers/markup/rdoc_markup.rb#13
 class YARD::Templates::Helpers::Markup::RDocMarkupToHtml < ::RDoc::Markup::ToHtml
   # source://yard//lib/yard/templates/helpers/markup/rdoc_markup.rb#16
   def initialize; end
@@ -19879,6 +17150,8 @@ class YARD::Templates::Helpers::Markup::RDocMarkupToHtml < ::RDoc::Markup::ToHtm
 end
 
 # Helper methods for loading and managing markup types.
+#
+# source://yard//lib/yard/templates/helpers/markup_helper.rb#7
 module YARD::Templates::Helpers::MarkupHelper
   # Attempts to load the first valid markup provider in {MARKUP_PROVIDERS}.
   # If a provider is specified, immediately try to load it.
@@ -19987,6 +17260,8 @@ YARD::Templates::Helpers::MarkupHelper::MARKUP_FILE_SHEBANG = T.let(T.unsafe(nil
 YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS = T.let(T.unsafe(nil), Hash)
 
 # Helper methods for method objects.
+#
+# source://yard//lib/yard/templates/helpers/method_helper.rb#5
 module YARD::Templates::Helpers::MethodHelper
   # @return [String] formatted arguments for a method
   #
@@ -20020,6 +17295,8 @@ module YARD::Templates::Helpers::MethodHelper
 end
 
 # Helper methods for managing module objects.
+#
+# source://yard//lib/yard/templates/helpers/module_helper.rb#6
 module YARD::Templates::Helpers::ModuleHelper
   # Prunes the method listing by running the verifier and removing attributes/aliases
   #
@@ -20032,6 +17309,8 @@ module YARD::Templates::Helpers::ModuleHelper
 end
 
 # Helper methods for text template formats.
+#
+# source://yard//lib/yard/templates/helpers/text_helper.rb#6
 module YARD::Templates::Helpers::TextHelper
   # @return [String] aligns text to the right
   #
@@ -20075,6 +17354,8 @@ module YARD::Templates::Helpers::TextHelper
 end
 
 # Helpers for UML template format
+#
+# source://yard//lib/yard/templates/helpers/uml_helper.rb#5
 module YARD::Templates::Helpers::UMLHelper
   # Formats the path of an object for Graphviz syntax
   #
@@ -20113,6 +17394,8 @@ end
 # list of sections and subsections.
 #
 # @since 0.6.0
+#
+# source://yard//lib/yard/templates/section.rb#7
 class YARD::Templates::Section < ::Array
   # @return [Section] a new instance of Section
   # @since 0.6.0
@@ -20194,6 +17477,7 @@ class YARD::Templates::Section < ::Array
   def parse_sections(args); end
 end
 
+# source://yard//lib/yard/templates/template.rb#6
 module YARD::Templates::Template
   include ::YARD::Templates::ErbCache
   include ::YARD::Templates::Helpers::BaseHelper
@@ -20427,6 +17711,7 @@ module YARD::Templates::Template
   end
 end
 
+# source://yard//lib/yard/templates/template.rb#59
 module YARD::Templates::Template::ClassMethods
   # source://yard//lib/yard/templates/template.rb#81
   def initialize(path, full_paths); end
@@ -20777,6 +18062,8 @@ YARD::VERSION = T.let(T.unsafe(nil), String)
 #   Verifier.new('@return', '@param', '@yield')
 #   # Equivalent to:
 #   Verifier.new('@return && @param && @yield')
+#
+# source://yard//lib/yard/verifier.rb#34
 class YARD::Verifier
   # Creates a verifier from a set of expressions
   #

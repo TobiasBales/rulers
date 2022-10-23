@@ -2914,6 +2914,7 @@ end
 # source://parser//lib/parser/rewriter.rb#91
 Parser::Rewriter::DEPRECATION_WARNING = T.let(T.unsafe(nil), String)
 
+# source://parser//lib/parser/ruby31.rb#14
 class Parser::Ruby31 < ::Parser::Base
   # reduce 0 omitted
   #
@@ -5549,8 +5550,6 @@ end
 # source://parser//lib/parser/source/range.rb#26
 class Parser::Source::Range
   include ::Comparable
-  include ::RuboCop::AST::Ext::Range
-  include ::RuboCop::Ext::Range
 
   # @api public
   # @param source_buffer [Buffer]
@@ -6827,14 +6826,4 @@ class Parser::VariablesStack
 
   # source://parser//lib/parser/variables_stack.rb#23
   def reset; end
-end
-
-module RuboCop::AST::Ext::Range
-  # source://rubocop-ast/1.21.0/lib/rubocop/ast/ext/range.rb#20
-  def line_span(exclude_end: T.unsafe(nil)); end
-end
-
-module RuboCop::Ext::Range
-  # source://rubocop/1.35.0/lib/rubocop/ext/range.rb#8
-  def single_line?; end
 end

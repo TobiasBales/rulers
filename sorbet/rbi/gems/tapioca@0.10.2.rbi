@@ -8,6 +8,8 @@ class Bundler::Dependency < ::Gem::Dependency
   include ::Tapioca::Gemfile::AutoRequireHook
 end
 
+ConstantType = T.let(T.unsafe(nil), T.untyped)
+
 # We need to do the alias-method-chain dance since Bootsnap does the same,
 # and prepended modules and alias-method-chain don't play well together.
 #
@@ -29,6 +31,15 @@ class Module
   # source://tapioca//lib/tapioca/runtime/trackers/mixin.rb#91
   def prepend_features(constant); end
 end
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#13
+Module::DELEGATION_RESERVED_KEYWORDS = T.let(T.unsafe(nil), Array)
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#14
+Module::DELEGATION_RESERVED_METHOD_NAMES = T.let(T.unsafe(nil), Set)
+
+# source://activesupport/7.0.4/lib/active_support/core_ext/module/delegation.rb#10
+Module::RUBY_RESERVED_KEYWORDS = T.let(T.unsafe(nil), Array)
 
 # source://tapioca//lib/tapioca/rbi_ext/model.rb#4
 module RBI; end
@@ -641,6 +652,7 @@ end
 # source://tapioca//lib/tapioca/commands.rb#5
 module Tapioca::Commands; end
 
+# source://tapioca//lib/tapioca/commands/annotations.rb#6
 class Tapioca::Commands::Annotations < ::Tapioca::Commands::CommandWithoutTracker
   # source://tapioca//lib/tapioca/commands/annotations.rb#18
   sig do
@@ -721,6 +733,7 @@ class Tapioca::Commands::Annotations < ::Tapioca::Commands::CommandWithoutTracke
   def token_for(repo_uri); end
 end
 
+# source://tapioca//lib/tapioca/commands/check_shims.rb#6
 class Tapioca::Commands::CheckShims < ::Tapioca::Commands::CommandWithoutTracker
   include ::Tapioca::SorbetHelper
   include ::Tapioca::RBIFilesHelper
@@ -848,6 +861,7 @@ class Tapioca::Commands::Configure < ::Tapioca::Commands::CommandWithoutTracker
   def spec; end
 end
 
+# source://tapioca//lib/tapioca/commands/dsl.rb#6
 class Tapioca::Commands::Dsl < ::Tapioca::Commands::CommandWithoutTracker
   include ::Tapioca::SorbetHelper
   include ::Tapioca::RBIFilesHelper
@@ -954,6 +968,7 @@ class Tapioca::Commands::Dsl < ::Tapioca::Commands::CommandWithoutTracker
   def verify_dsl_rbi(tmp_dir:); end
 end
 
+# source://tapioca//lib/tapioca/commands/gem.rb#6
 class Tapioca::Commands::Gem < ::Tapioca::Commands::Command
   include ::Tapioca::SorbetHelper
   include ::Tapioca::RBIFilesHelper
@@ -1058,6 +1073,7 @@ class Tapioca::Commands::Gem < ::Tapioca::Commands::Command
   def report_diff_and_exit_if_out_of_date(diff, command); end
 end
 
+# source://tapioca//lib/tapioca/commands/require.rb#6
 class Tapioca::Commands::Require < ::Tapioca::Commands::CommandWithoutTracker
   # source://tapioca//lib/tapioca/commands/require.rb#13
   sig { params(requires_path: ::String, sorbet_config_path: ::String).void }
@@ -1068,6 +1084,7 @@ class Tapioca::Commands::Require < ::Tapioca::Commands::CommandWithoutTracker
   def execute; end
 end
 
+# source://tapioca//lib/tapioca/commands/todo.rb#6
 class Tapioca::Commands::Todo < ::Tapioca::Commands::CommandWithoutTracker
   include ::Tapioca::SorbetHelper
 
@@ -3330,19 +3347,6 @@ Tapioca::VERSION = T.let(T.unsafe(nil), String)
 # source://tapioca//lib/tapioca/helpers/source_uri.rb#6
 module URI
   include ::URI::RFC2396_REGEXP
-end
-
-class URI::FTP < ::URI::Generic
-  include ::OpenURI::OpenRead
-end
-
-class URI::Generic
-  include ::URI::RFC2396_REGEXP
-  include ::URI
-end
-
-class URI::HTTP < ::URI::Generic
-  include ::OpenURI::OpenRead
 end
 
 class URI::RFC2396_Parser

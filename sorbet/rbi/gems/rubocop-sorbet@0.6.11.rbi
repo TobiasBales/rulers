@@ -945,6 +945,8 @@ RuboCop::Cop::Sorbet::ValidSigil::SIGIL_REGEX = T.let(T.unsafe(nil), Regexp)
 # source://rubocop-sorbet//lib/rubocop/cop/sorbet/sigils/valid_sigil.rb#51
 RuboCop::Cop::Sorbet::ValidSigil::STRICTNESS_LEVELS = T.let(T.unsafe(nil), Array)
 
+module RuboCop::Cop::Style; end
+
 class RuboCop::Cop::Style::MutableConstant < ::RuboCop::Cop::Base
   include ::RuboCop::Cop::Sorbet::MutableConstantSorbetAwareBehaviour
 end
