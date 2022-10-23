@@ -8,6 +8,7 @@ require "rulers/object"
 require "rulers/string"
 require "rulers/auto_loading"
 require "rulers/routing"
+require "rulers/controller"
 
 module Rulers
   extend T::Sig
@@ -36,28 +37,6 @@ module Rulers
       response = controller.send(action)
 
       [200, { "content-type" => "text/html" }, [response]]
-    end
-  end
-
-  class Controller
-    extend T::Sig
-
-    sig { params(env: Rulers::Env).void }
-    def initialize(env)
-      @env = env
-    end
-
-    sig { returns(Env) }
-    attr_reader :env
-
-    sig { returns(T::Boolean) }
-    def get?
-      env["REQUEST_METHOD"] == "GET"
-    end
-
-    sig { returns(T::Boolean) }
-    def post?
-      env["REQUEST_METHOD"] == "POST"
     end
   end
 end
