@@ -7,3 +7,6 @@ pre-commit:
     sorbet:
       glob: "*.rb"
       run: bundle exec srb tc
+    tests:
+      glob: "*.rb"
+      run: bundle exec rake test
