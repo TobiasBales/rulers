@@ -13,7 +13,9 @@ class Object
     @calling_for.add(const)
 
     require const.to_s.to_underscore
+    # rubocop:disable Sorbet/ConstantsFromStrings
     klass = Object.const_get(const)
+    # rubocop:enable Sorbet/ConstantsFromStrings
 
     @calling_for.delete(const)
 
