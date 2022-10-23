@@ -8,22 +8,28 @@ module Rulers
     extend T::Sig
 
     Locals = T.type_alias { T::Hash[String, T.untyped] }
+    RenderOptions = T.type_alias { { action: Symbol } }
 
     sig { params(env: Rulers::Env).void }
     def initialize(env)
       @env = env
+      @_responded = T.let(false, T::Boolean)
     end
 
     sig { returns(Env) }
     attr_reader :env
 
-    sig { params(view_name: Symbol, locals: Locals).returns(String) }
-    def render(view_name, locals = {})
-      filename = File.join("app", "views", controller_name, "#{view_name}.html.erb")
+    sig { params(action: Symbol).returns(String) }
+    def render(action:)
+      filename = File.join("app", "views", controller_name, "#{action}.html.erb")
       template = File.read(filename)
       eruby = Erubis::Eruby.new(template)
 
-      eruby.result(supplement_locals(locals))
+      locals = build_locals
+
+      @_responded = true
+
+      eruby.result(locals)
     end
 
     sig { returns(String) }
@@ -41,11 +47,20 @@ module Rulers
       env["REQUEST_METHOD"] == "POST"
     end
 
+    sig { params(action: T.any(String, Symbol)).returns(String) }
+    def _process(action)
+      result = send(action)
+
+      result = render(action: action.to_sym) unless @_responded
+
+      result
+    end
+
     private
 
-    sig { params(locals: Locals).returns(Locals) }
-    def supplement_locals(locals)
-      locals = locals.merge(controller_name: controller_name)
+    sig { returns(Locals) }
+    def build_locals
+      locals = { controller_name: controller_name }
 
       instance_variables.each do |instance_variable|
         locals[instance_variable] = instance_variable_get(instance_variable)

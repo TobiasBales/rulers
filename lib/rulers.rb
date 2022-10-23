@@ -34,7 +34,7 @@ module Rulers
 
       controller = T.unsafe(klass).new(env)
 
-      response = controller.send(action)
+      response = controller._process(action)
 
       [200, { "content-type" => "text/html" }, [response]]
     end
