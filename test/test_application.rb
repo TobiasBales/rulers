@@ -3,6 +3,12 @@
 
 require_relative "test_helper"
 
+class TestController < Rulers::Controller
+  def index
+    "Hello!"
+  end
+end
+
 class TestApp < Rulers::Application
 end
 
@@ -14,7 +20,7 @@ class RulersAppTest < Minitest::Test
   end
 
   def test_request
-    get "/"
+    get "/test/index"
     body = last_response.body
 
     assert last_response.ok?

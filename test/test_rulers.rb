@@ -5,6 +5,6 @@ require "test_helper"
 
 class TestRulers < Minitest::Test
   def test_that_it_has_a_version_number
-    assert_not_nil ::Rulers::VERSION
+    refute_nil ::Rulers::VERSION
   end
 end
